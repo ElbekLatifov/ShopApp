@@ -52,7 +52,7 @@
 
         <Border Background="#ffffff" Grid.Column="1" CornerRadius="0,0,0,0">
 
-            <StackPanel>
+            <StackPanel >
                 <Frame x:Name="Salom" NavigationUIVisibility="Hidden" Height="700" Width="915"/>
             </StackPanel>
 
