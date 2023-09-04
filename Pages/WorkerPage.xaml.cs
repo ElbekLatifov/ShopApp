@@ -1,7 +1,9 @@
-﻿using ShopSystem.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopSystem.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,6 +25,9 @@ namespace ShopSystem.Pages
             belgi_moymagazin.Visibility = Visibility.Hidden;
             belgi_sklad.Visibility = Visibility.Hidden;
             belgi_addproduct.Visibility = Visibility.Hidden;
+            cat_steak.Visibility = Visibility.Hidden;
+            search_steak.Visibility= Visibility.Hidden;
+            Salom.Height = 0;
         }
 
         private void myshops_btn_Click(object sender, RoutedEventArgs e)
@@ -30,34 +35,42 @@ namespace ShopSystem.Pages
            // Salom.Navigate(new ShopsPage(MainWindow, this, allShops: true));
             belgi_moymagazin.Visibility = Visibility.Visible;
             belgi_sklad.Visibility = Visibility.Hidden;
+            NoVisiblb();
+            Salom.Height = 0;
+            worker_grid.Height = 700;
+            Page_Loaded(false, true);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Page_Loaded(false, true);
             belgi_moymagazin.Visibility = Visibility.Hidden;
-            belgi_sklad.Visibility = Visibility.Visible; 
+            belgi_sklad.Visibility = Visibility.Visible;
+            Salom.Height = 700;
+            Salom.Navigate(new StoragesPage(MainWindow));
+            worker_grid.Height = 0;
         }
 
-        public void ShopsPage(bool allShops = false, bool myShops = false, bool IsAfter =  false, bool IsAfter2 = false, Guid? ids = null, bool isBack = false, bool _category = false, bool _subcategory = false, bool _products = false)
-        {
-          //  Salom.Navigate(new ShopsPage(MainWindow, this, allShops, myShops, IsAfter, IsAfter2, ids,_category , _subcategory, _products));
-        }
-
-        private void addproduct_btn_Click(object sender, RoutedEventArgs e)
+        private async void addproduct_btn_Click(object sender, RoutedEventArgs e)
         {
             if(CategoryId == null)
             {
-                MessageBox.Show("");
-              //  Salom.Navigate(new ShopsPage(MainWindow, this, isAfter: true));
+                worker_grid.Height = 700;
+                Salom.Height = 0;
+                await Load(_category: true);
+                MessageBox.Show("Выберите категорию");
             }
             else if(SubCategoryId == null) 
             {
-                MessageBox.Show("");
-              //  Salom.Navigate(new ShopsPage(MainWindow, this, isAfter2: false));
+                worker_grid.Height = 700;
+                Salom.Height = 0;
+                await Load(_subcategory: true); 
+                MessageBox.Show("Выберите подкатегорию");
             }
             else
             {
+                worker_grid.Height = 700;
+                Salom.Height = 0;
+                await Load(_products: true); 
                 AddProduct addProduct = new AddProduct(MainWindow, this, SubCategoryId);
                 addProduct.ShowDialog();
             }
@@ -65,7 +78,7 @@ namespace ShopSystem.Pages
 
         private void nazad_btn_Click(object sender, RoutedEventArgs e)
         {
-           // Salom.Navigate(new ShopsPage(MainWindow, this, isBack: true));
+            Back();
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,14 +94,14 @@ namespace ShopSystem.Pages
             search_steak.Visibility = Visibility.Visible;
         }
 
-        public void Load(bool _category = false, bool _subcategory = false, bool _products = false)
+        public async Task Load(bool _category = false, bool _subcategory = false, bool _products = false)
         {
             Visiblb();
             var db = new AppDbContext();
 
             if (_category)
             {
-                var categories = db.Categories.OrderByDescending(p => p.Created_time).ToList();
+                var categories = await db.Categories.OrderByDescending(p => p.Created_time).ToListAsync();
                 var categoriesList = new List<CategoryControl>();
 
                 foreach (var category in categories)
@@ -107,7 +120,7 @@ namespace ShopSystem.Pages
 
             if (_subcategory)
             {
-                var subcategories = db.Subcategories.Where(p => p.ParentId == CategoryId).OrderByDescending(p => p.Created_time).ToList();
+                var subcategories = await db.Subcategories.Where(p => p.ParentId == CategoryId).OrderByDescending(p => p.Created_time).ToListAsync();
                 var categoriesList = new List<CategoryControl>();
 
                 foreach (var subcategory in subcategories)
@@ -126,7 +139,7 @@ namespace ShopSystem.Pages
 
             if (_products)
             {
-                var products = db.Products.Where(p => p.Categoryid == SubCategoryId && p.ShopId == ShopId).OrderByDescending(p => p.Created_time).ToList();
+                var products = await db.Products.Where(p => p.Categoryid == SubCategoryId && p.ShopId == ShopId).OrderByDescending(p => p.Created_time).ToListAsync();
                 var productsBox = new List<ProductControl>();
 
                 foreach (var product in products)
@@ -265,55 +278,48 @@ namespace ShopSystem.Pages
 
         }
 
-        public void Back(bool isBack)
+        public async void Back()
         {
             var db = new AppDbContext();
-            if (isBack)
+
+            if (db.Subcategories.Any(p => p.Id == SubCategoryId))
             {
-                if (SubCategoryId != null)
+                var _subcategory = db.Subcategories.First(p => p.Id == SubCategoryId);
+                var _category = db.Categories.First(p => p.Id == _subcategory.ParentId);
+                var shop = db.Shops.First(p => p.Id == ShopId);
+                await Load(false, true, false);
+                addCategory_btn.Content = "+Категория";
+                subcategoryname.Text = "";
+                shopName.Text = shop.Name;
+                main_lbl.Content = "Мой магазин: ";
+                categoryname.Text = "   Категория: " + _category.Title;
+                var category = db.Categories.First();
+                CategoryId = category.Id;
+                SubCategoryId = null;
+            }
+            else
+            {
+                if (db.Categories.Any(p => p.Id == CategoryId))
                 {
-                    SubCategoryId = null;
-                }
-                else if (CategoryId != null)
-                {
-                    CategoryId = null;
-                }
-                if (db.Subcategories.Any(p => p.Id == SubCategoryId))
-                {
-                    var _subcategory = db.Subcategories.First(p => p.Id == SubCategoryId);
-                    var _category = db.Categories.First(p => p.Id == _subcategory.ParentId);
-                    var shop = db.Shops.First(p => p.Id == ShopId);
-                    Load(false, true, false);
+                    await Load(true, false, false);
                     addCategory_btn.Content = "+Категория";
-                    subcategoryname.Text = "";
-                    shopName.Text = shop.Name;
                     main_lbl.Content = "Мой магазин: ";
-                    categoryname.Text = "   Категория: " + _category.Title;
-                    var category = db.Categories.First();
-                    CategoryId = category.Id;
+                    var shop = db.Shops.First(p => p.Id == ShopId);
+                    categoryname.Text = "";
+                    shopName.Text = shop.Name;
+                    CategoryId = null;
                 }
                 else
                 {
-                    if (db.Categories.Any(p => p.Id == CategoryId))
-                    {
-                        Load(true, false, false);
-                        addCategory_btn.Content = "+Категория";
-                        main_lbl.Content = "Мой магазин: ";
-                        var shop = db.Shops.First(p => p.Id == ShopId);
-                        categoryname.Text = "";
-                        shopName.Text = shop.Name;
-                        CategoryId = null;
-                    }
-                    else
-                    {
-                        main_lbl.Content = "Мои магазины";
-                        shopName.Text = "";
-                        shops_btn.Visibility = Visibility.Visible;
-                        addproduct_btn.Visibility = Visibility.Hidden;
-                        nazad_btn.Visibility = Visibility.Hidden;
-                        sklad_btn.Visibility = Visibility.Hidden;
-                        Page_Loaded(false, true);
-                    }
+                    main_lbl.Content = "Мои магазины";
+                    shopName.Text = "";
+                    shops_btn.Visibility = Visibility.Visible;
+                    addproduct_btn.Visibility = Visibility.Hidden;
+                    nazad_btn.Visibility = Visibility.Hidden;
+                    sklad_btn.Visibility = Visibility.Hidden;
+                    belgi_moymagazin.Visibility = Visibility.Visible;
+                    belgi_sklad.Visibility = Visibility.Hidden;
+                    Page_Loaded(false, true);
                 }
             }
         }

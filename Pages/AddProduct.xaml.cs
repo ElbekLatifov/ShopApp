@@ -109,7 +109,7 @@ namespace ShopSystem.Pages
             product.Barcode = GetBarcode(product.Id);
             db.Products.Update(product);
             db.SaveChanges();
-            shopsPage.ShopsPage(_category: false, _subcategory: false, _products: true);
+            shopsPage.Load(_category: false, _subcategory: false, _products: true);
             Close();
         }
 

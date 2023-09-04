@@ -49,15 +49,15 @@ namespace ShopSystem.Pages
             {
                 workerPage.addCategory_btn.Content = "+Продукт";
                 workerPage.subcategoryname.Text = $"   Подкатегория: {category_lbl.Text}";
-                workerPage.Load(false,false,true);
                 workerPage.SubCategoryId = (Guid)id.Content;
+                workerPage.Load(false,false,true);
             }
             else if (query.Categories.Any(x => x.Id == (Guid)id.Content))
             {
-                workerPage.addCategory_btn.Content = "+Категория";
+                workerPage.addCategory_btn.Content = "+Подкатегория";
                 workerPage.categoryname.Text = $"   Категория: {category_lbl.Text}";
-                workerPage.Load(false,true,false);
                 workerPage.CategoryId = (Guid)id.Content;
+                workerPage.Load(false,true,false);
             }
         }
 

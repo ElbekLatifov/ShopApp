@@ -55,11 +55,8 @@
             <Frame x:Name="Salom" NavigationUIVisibility="Hidden" Height="700" Width="915"/>
             <Grid x:Name="worker_grid" VerticalAlignment="Bottom" Height="700">
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel x:Name="cat_steak" Height="120" VerticalAlignment="Top">
-                        <Button x:Name="back_btn" Background="DarkSlateGray" BorderBrush="DarkSlateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Button_Click" Margin="10 10" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Height="30" Width="30">
-                            <md:PackIcon Kind="ArrowBack"/>
-                        </Button>
-                        <Button x:Name="addCategory_btn" Background="DarkSlateGray" BorderBrush="DarkSlateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Content="+Категория" Click="addCategory_btn_Click" Margin="10 10 0 0" Width="110"/>
+                    <StackPanel x:Name="cat_steak" Height="70" VerticalAlignment="Top">
+                        <Button x:Name="addCategory_btn" Background="DarkSlateGray" BorderBrush="DarkSlateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Content="+Категория" Click="addCategory_btn_Click" Margin="10 30 0 0" Width="130"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="25 10 0 0" Height="50" VerticalAlignment="Top">
                         <Label x:Name="main_lbl" FontSize="12" FontWeight="Bold" Padding="0,0,0,0" FontFamily="Times New Roman"/>
