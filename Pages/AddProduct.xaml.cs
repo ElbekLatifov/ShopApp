@@ -2,6 +2,7 @@
 using ShopSystem.Context;
 using ShopSystem.Models;
 using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,11 +24,19 @@ namespace ShopSystem.Pages
             InitializeComponent();
             this.shopsPage = shopsPage;
             this.CategoryId = CategoryId;
-            categoryName_txt.Select(0, 0);
+            Names(shopsPage);
             Owner = main;
         }
 
-        
+        private void Names(WorkerPage workerPage)
+        {
+            var db = new AppDbContext();
+            var category = db.Categories.First(p => p.Id == workerPage.CategoryId);
+            var subcategory = db.Subcategories.First(p => p.Id == workerPage.SubCategoryId);
+
+            category_name.Text = category.Title;
+            subcategory_name.Text = subcategory.Title;
+        }
         private string GetBarcode(Guid path)
         {
             byte[] generatedBarcode = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(path.ToString()!));
@@ -88,7 +97,7 @@ namespace ShopSystem.Pages
             }
         }
 
-        private void AddProductMethod()
+        private async void AddProductMethod()
         {
             if (categoryName_txt.Text.Length == 0 || Price_come_txt.Text.Length == 0 || Price_go_txt.Text.Length == 0) { MessageBox.Show("Заполните необходимые поля"); return; }
 
@@ -109,7 +118,7 @@ namespace ShopSystem.Pages
             product.Barcode = GetBarcode(product.Id);
             db.Products.Update(product);
             db.SaveChanges();
-            shopsPage.Load(_category: false, _subcategory: false, _products: true);
+            await shopsPage.Load(_category: false, _subcategory: false, _products: true);
             Close();
         }
 

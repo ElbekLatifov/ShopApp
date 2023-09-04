@@ -17,22 +17,26 @@
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="150"/>
-                         <ColumnDefinition Width="150"/>
-                         <ColumnDefinition />
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                    <Button x:Name="read_btn" Width="90" Height="40" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="read_btn_Click">
-                        <md:PackIcon Kind="Reload"/>
+                    <Button x:Name="read_btn" Width="90" Height="40" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="read_btn_Click" Padding="0 0 0 0">
+                        <Label Content="Обновить"/>
                     </Button>
-                    <Button x:Name="add_btn" Grid.Column="1" Height="40" Width="90" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="add_btn_Click">
-                        <md:PackIcon Kind="AddBox"/>
+                    <Button x:Name="add_btn" Grid.Column="1" Height="40" Width="90" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="add_btn_Click" Padding="0 0 0 0">
+                        <Label Content="Добавить"/>
                     </Button>
-                    <Button x:Name="edit_btn" Grid.Column="2"  Width="90" Height="40" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="edit_btn_Click">
-                        <md:PackIcon Kind="Edit"/>
+                    <Button x:Name="edit_btn" Grid.Column="2"  Width="110" Height="40" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="edit_btn_Click" Padding="0 0 0 0">
+                        <Label Content="Редоктировать"/>
                     </Button>
-                    <Button x:Name="delete_btn" Grid.Column="3" Height="40" Width="90" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="delete_btn_Click">
-                        <md:PackIcon Kind="Delete"/>
+                    <Button x:Name="delete_btn" Grid.Column="3" Height="40" Width="90" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="delete_btn_Click" Padding="0 0 0 0">
+                        <Label Content="Удалить"/>
                     </Button>
-                    
+                    <Button x:Name="only_add" Grid.Column="4" Height="40" Width="120" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="only_add_Click" Padding="0 0 0 0">
+                        <Label Content="Быстрая приход"/>
+                    </Button>
+
 
                 </Grid>
             </StackPanel>

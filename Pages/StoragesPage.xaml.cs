@@ -31,6 +31,7 @@ namespace ShopSystem.Pages
             Load();
             edit_btn.Visibility = Visibility.Collapsed;
             delete_btn.Visibility = Visibility.Collapsed;
+            only_add.Visibility = Visibility.Collapsed;
         }
 
         public void Load()
@@ -108,12 +109,14 @@ namespace ShopSystem.Pages
             addProductToGrid.ShowDialog();
             edit_btn.Visibility = Visibility.Collapsed;
             delete_btn.Visibility = Visibility.Collapsed;
+            only_add.Visibility = Visibility.Collapsed;
         }
 
         private void storage_data_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             edit_btn.Visibility = Visibility.Visible;
             delete_btn.Visibility = Visibility.Visible;
+            only_add.Visibility = Visibility.Visible;
         }
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
@@ -127,6 +130,7 @@ namespace ShopSystem.Pages
             db.Products.Remove(product);
             db.SaveChanges();
             edit_btn.Visibility = Visibility.Collapsed;
+            only_add.Visibility= Visibility.Collapsed;
             delete_btn.Visibility = Visibility.Collapsed;
             Load();
         }
@@ -136,6 +140,42 @@ namespace ShopSystem.Pages
             Load();
             edit_btn.Visibility= Visibility.Collapsed;
             delete_btn.Visibility = Visibility.Collapsed;
+            only_add.Visibility = Visibility.Collapsed;  
+        }
+
+        private void only_add_Click(object sender, RoutedEventArgs e)
+        {
+            var index = storage_data.SelectedIndex;
+            var db = new AppDbContext();
+
+            var items = new List<DataModel>();
+            var products = db.Products.ToList();
+            int i = 1;
+            if (products.Count > 0)
+            {
+                foreach (var product in products)
+                {
+                    var subcategory = db.Subcategories.First(p => p.Id == product.Categoryid);
+                    var category = db.Categories.First(p => p.Id == subcategory.ParentId);
+                    var shop = db.Shops.First(p => p.Id == product.ShopId);
+
+                    var item = new DataModel();
+                    item.Номер = i;
+                    item.Продукт = product.Title;
+                    item.Подкатегория = subcategory.Title;
+                    item.Категория = category.Title;
+                    item.Прибывшая = product.PriceCome;
+                    item.Штрихкод = product.Barcode!;
+                    item.Текущая = product.PriceGo;
+                    item.Магазин = shop.Name;
+                    item.Количство = product.Count;
+                    items.Add(item);
+                    i++;
+                }
+            }
+            var selectedData = items[index];
+            OnlyNumberAdd editFrom = new OnlyNumberAdd(Main, this, selectedData);
+            editFrom.ShowDialog();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace ShopSystem.Pages
             workerPage = worker;
         }
 
-        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var query = new AppDbContext();
 
@@ -50,14 +50,14 @@ namespace ShopSystem.Pages
                 workerPage.addCategory_btn.Content = "+Продукт";
                 workerPage.subcategoryname.Text = $"   Подкатегория: {category_lbl.Text}";
                 workerPage.SubCategoryId = (Guid)id.Content;
-                workerPage.Load(false,false,true);
+                await workerPage.Load(false,false,true);
             }
             else if (query.Categories.Any(x => x.Id == (Guid)id.Content))
             {
                 workerPage.addCategory_btn.Content = "+Подкатегория";
                 workerPage.categoryname.Text = $"   Категория: {category_lbl.Text}";
                 workerPage.CategoryId = (Guid)id.Content;
-                workerPage.Load(false,true,false);
+                await workerPage.Load(false, true, false);
             }
         }
 
@@ -68,7 +68,7 @@ namespace ShopSystem.Pages
             updateWindow.ShowDialog();
         }
 
-        private void deletebtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void deletebtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var query = new AppDbContext();
             if(query.Categories.Any(x => x.Id == (Guid)id.Content))
@@ -93,7 +93,7 @@ namespace ShopSystem.Pages
                         }
                         query.Categories.Remove(category);
                         query.SaveChanges();
-                        workerPage.Load(true, false, false);
+                        await workerPage.Load(true, false, false);
                     }
                 }
                
@@ -111,7 +111,7 @@ namespace ShopSystem.Pages
                     
                     query.Subcategories.Remove(subcategory);
                     query.SaveChanges();
-                    workerPage.Load(false, true, false);
+                    await workerPage.Load(false, true, false);
                 }
             }            
         }

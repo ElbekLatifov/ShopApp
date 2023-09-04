@@ -33,7 +33,7 @@ namespace ShopSystem.Pages
             Owner = main;
         }
 
-        private void AddCategoryMethod()
+        private async void AddCategoryMethod()
         {
             if (categoryName_txt.Text.Length == 0) { MessageBox.Show("Заполните необходимые поля"); return; }
             var db = new AppDbContext();
@@ -48,7 +48,7 @@ namespace ShopSystem.Pages
                 };
                 db.Subcategories.Add(subcategory);
                 db.SaveChanges();
-                page.Load(false,true,false);
+                await page.Load(false, true, false);
                 Close();
             }
             else
@@ -61,7 +61,7 @@ namespace ShopSystem.Pages
                 };
                 db.Categories.Add(category);
                 db.SaveChanges();
-                page.Load(true,false,false);
+                await page.Load(true,false,false);
                 Close();
             }
         }
