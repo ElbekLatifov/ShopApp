@@ -36,7 +36,7 @@ namespace ShopSystem.Pages
         {
             var db = new AppDbContext();
             var subcategory = db.Subcategories.First(p=>p.Title == subcategory_name.SelectedValue.ToString());
-            var shop = db.Shops.First(p=>p.Name == shop_name.SelectedValue.ToString());
+            var shop = db.Shops.First(p=>p.Id == StoragesPage.Worker.ShopId);
             var product = new Product()
             {
                 ShopId = shop.Id,
@@ -61,19 +61,12 @@ namespace ShopSystem.Pages
             var db = new AppDbContext();
             var categories = db.Categories.ToList();
             var list = new List<string>();
-            var list2 = new List<string>();
             foreach ( var category in categories )
             {
                 list.Add(category.Title);
             }
-            var subcategories = db.Shops.ToList();
-            foreach ( var subcategory in subcategories )
-            {
-                list2.Add(subcategory.Name);
-            }
 
             category_name.ItemsSource = list;
-            shop_name.ItemsSource = list2;
         }
 
         private string GetBarcode(Guid path)
@@ -139,7 +132,7 @@ namespace ShopSystem.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(categoryName_txt.Text.Length == 0 || Price_come_txt.Text.Length == 0 || Price_go_txt.Text.Length == 0 || Count_txt.Text.Length == 0 || category_name.SelectedValue == null || subcategory_name.SelectedValue == null || shop_name.SelectedValue == null)
+            if(categoryName_txt.Text.Length == 0 || Price_come_txt.Text.Length == 0 || Price_go_txt.Text.Length == 0 || Count_txt.Text.Length == 0 || category_name.SelectedValue == null || subcategory_name.SelectedValue == null)
             {
                 MessageBox.Show("to'ldiring");
                 return;
@@ -195,10 +188,10 @@ namespace ShopSystem.Pages
 
         private void category_name_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(shop_name.SelectedValue == null)
-            {
-                MessageBox.Show("avval shopni tanla"); return;
-            }
+            //if(shop_name.SelectedValue == null)
+            //{
+            //    MessageBox.Show("avval shopni tanla"); return;
+            //}
         }
 
         private void category_name_SelectionChanged(object sender, SelectionChangedEventArgs e)

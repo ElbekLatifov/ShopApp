@@ -34,8 +34,8 @@ namespace ShopSystem.Pages
             var category = db.Categories.First(p => p.Id == workerPage.CategoryId);
             var subcategory = db.Subcategories.First(p => p.Id == workerPage.SubCategoryId);
 
-            category_name.Text = category.Title;
-            subcategory_name.Text = subcategory.Title;
+            category_name.Text = "Категория: " + category.Title;
+            subcategory_name.Text = "Подкатегория: " + subcategory.Title;
         }
         private string GetBarcode(Guid path)
         {

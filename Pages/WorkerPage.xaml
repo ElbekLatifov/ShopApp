@@ -55,8 +55,11 @@
             <Frame x:Name="Salom" NavigationUIVisibility="Hidden" Height="700" Width="915"/>
             <Grid x:Name="worker_grid" VerticalAlignment="Bottom" Height="700">
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel x:Name="cat_steak" Height="70" VerticalAlignment="Top">
-                        <Button x:Name="addCategory_btn" Background="DarkSlateGray" BorderBrush="DarkSlateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Content="+Категория" Click="addCategory_btn_Click" Margin="10 30 0 0" Width="130"/>
+                    <StackPanel x:Name="cat_steak" Height="140" VerticalAlignment="Top">
+                        <Button x:Name="back_btn" Background="DarkSlateGray" BorderBrush="DarkSlateGray" HorizontalAlignment="Left" Margin="10 10" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Height="35" Width="45" Foreground="White" Click="back_btn_Click">
+                            <md:PackIcon Kind="ArrowBack" Height="30" Width="40"/>
+                        </Button>
+                        <Button x:Name="addCategory_btn" Background="DarkSlateGray" BorderBrush="DarkSlateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Content="+Категория" Click="addCategory_btn_Click" Margin="10 20 0 0" Width="140"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="25 10 0 0" Height="50" VerticalAlignment="Top">
                         <Label x:Name="main_lbl" FontSize="12" FontWeight="Bold" Padding="0,0,0,0" FontFamily="Times New Roman"/>
@@ -78,8 +81,8 @@
                     </StackPanel>
                 </StackPanel>
 
-                <ScrollViewer Height="600" VerticalAlignment="Center" Margin="0,100,0,0" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl x:Name="shoplists" Width="{Binding ElementName=shopsPage, Path=Width}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Height="580" VerticalAlignment="Center" Margin="0,120,0,0" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="shoplists" Width="{Binding ElementName=ShopPage, Path=Width}" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel/>

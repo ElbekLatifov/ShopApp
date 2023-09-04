@@ -22,7 +22,7 @@ public class AppDbContext : DbContext
     public DbSet<Shop> Shops { get; set; }
 
     public DbSet<User> Users { get; set; }
-
+    public DbSet<AddedProduct> AdditionalProducts { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

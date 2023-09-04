@@ -9,7 +9,6 @@
         Title="AddProductToGrid" Height="550" Width="400" WindowStartupLocation="CenterOwner">
     <Grid>
         <StackPanel Height="500" Width="250">
-            <ComboBox md:HintAssist.Hint="Выберите магазин" x:Name="shop_name" Height="40" Width="250" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Times New Roman"/>
             <ComboBox md:HintAssist.Hint="Выберите категорию" x:Name="category_name" Height="40" Width="250" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Times New Roman" MouseLeftButtonDown="category_name_MouseLeftButtonDown" SelectionChanged="category_name_SelectionChanged"/>
             <ComboBox md:HintAssist.Hint="Выберите подкатегорию" x:Name="subcategory_name" Height="40" Width="250" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Times New Roman" MouseLeftButtonDown="subcategory_name_MouseLeftButtonDown"/>
             <TextBox md:HintAssist.Hint="Название продукта" md:HintAssist.IsFloating="True" x:Name="categoryName_txt" Margin="0 20 0 0" Height="40" FontSize="15" PreviewTextInput="categoryName_txt_PreviewTextInput" VerticalContentAlignment="Bottom" Padding="0,0,0,0" FontFamily="Times New Roman"/>

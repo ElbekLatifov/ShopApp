@@ -24,14 +24,13 @@ namespace ShopSystem.Pages
     public partial class StoragesPage : Page
     {
         MainWindow Main;
-        public StoragesPage(MainWindow main)
+        public WorkerPage Worker;
+        public StoragesPage(MainWindow main, WorkerPage worker)
         {
             InitializeComponent();
             Main = main;
+            Worker = worker;
             Load();
-            edit_btn.Visibility = Visibility.Collapsed;
-            delete_btn.Visibility = Visibility.Collapsed;
-            only_add.Visibility = Visibility.Collapsed;
         }
 
         public void Load()
@@ -39,7 +38,7 @@ namespace ShopSystem.Pages
             using (var db = new AppDbContext())
             {
                 var items = new List<DataModel>();
-                var products = db.Products.ToList();
+                var products = db.Products.Where(p=>p.ShopId == Worker.ShopId).ToList();
                 int i = 1;
                 if (products.Count > 0)
                 {
@@ -71,10 +70,11 @@ namespace ShopSystem.Pages
         private void edit_btn_Click(object sender, RoutedEventArgs e)
         {
             var index = storage_data.SelectedIndex;
+            if (index == -1) return;
             var db = new AppDbContext();
             
                 var items = new List<DataModel>();
-                var products = db.Products.ToList();
+                var products = db.Products.Where(p => p.ShopId == Worker.ShopId).ToList();
                 int i = 1;
                 if (products.Count > 0)
                 {
@@ -107,49 +107,42 @@ namespace ShopSystem.Pages
         {
             AddProductToGrid addProductToGrid = new AddProductToGrid(Main, this);
             addProductToGrid.ShowDialog();
-            edit_btn.Visibility = Visibility.Collapsed;
-            delete_btn.Visibility = Visibility.Collapsed;
-            only_add.Visibility = Visibility.Collapsed;
         }
 
         private void storage_data_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            edit_btn.Visibility = Visibility.Visible;
-            delete_btn.Visibility = Visibility.Visible;
-            only_add.Visibility = Visibility.Visible;
+            //edit_btn.Visibility = Visibility.Visible;
+            //delete_btn.Visibility = Visibility.Visible;
+            //only_add.Visibility = Visibility.Visible;
         }
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
             var index = storage_data.SelectedIndex;
+            if (index == -1) return;
             var items = new List<DataModel>();
             items = (List<DataModel>)storage_data.ItemsSource;
             var item = items[index];
             var db = new AppDbContext();
-            var product = db.Products.First(p=>p.Barcode == item.Штрихкод);
+            var product = db.Products.Where(p => p.ShopId == Worker.ShopId).First(p => p.Barcode == item.Штрихкод);
             db.Products.Remove(product);
             db.SaveChanges();
-            edit_btn.Visibility = Visibility.Collapsed;
-            only_add.Visibility= Visibility.Collapsed;
-            delete_btn.Visibility = Visibility.Collapsed;
             Load();
         }
 
         private void read_btn_Click(object sender, RoutedEventArgs e)
         {
-            Load();
-            edit_btn.Visibility= Visibility.Collapsed;
-            delete_btn.Visibility = Visibility.Collapsed;
-            only_add.Visibility = Visibility.Collapsed;  
+            Load(); 
         }
 
         private void only_add_Click(object sender, RoutedEventArgs e)
         {
             var index = storage_data.SelectedIndex;
+            if (index == -1) return;
             var db = new AppDbContext();
 
             var items = new List<DataModel>();
-            var products = db.Products.ToList();
+            var products = db.Products.Where(p => p.ShopId == Worker.ShopId).ToList();
             int i = 1;
             if (products.Count > 0)
             {
@@ -175,7 +168,7 @@ namespace ShopSystem.Pages
             }
             var selectedData = items[index];
             OnlyNumberAdd editFrom = new OnlyNumberAdd(Main, this, selectedData);
-            editFrom.ShowDialog();
+            editFrom.ShowDialog();       
         }
     }
 }

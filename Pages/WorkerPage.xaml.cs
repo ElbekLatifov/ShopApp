@@ -48,7 +48,7 @@ namespace ShopSystem.Pages
             belgi_sklad.Visibility = Visibility.Visible;
             belgi_addproduct.Visibility = Visibility.Hidden;
             Salom.Height = 700;
-            Salom.Navigate(new StoragesPage(MainWindow));
+            Salom.Navigate(new StoragesPage(MainWindow, this));
             worker_grid.Height = 0;
         }
 
@@ -62,22 +62,26 @@ namespace ShopSystem.Pages
                 worker_grid.Height = 700;
                 Salom.Height = 0;
                 await Load(_category: true);
-                MessageBox.Show("Выберите категорию");
             }
             else if(SubCategoryId == null) 
             {
                 worker_grid.Height = 700;
                 Salom.Height = 0;
                 await Load(_subcategory: true); 
-                MessageBox.Show("Выберите подкатегорию");
             }
             else
             {
-                worker_grid.Height = 700;
-                Salom.Height = 0;
-                await Load(_products: true); 
-                AddProduct addProduct = new AddProduct(MainWindow, this, SubCategoryId);
-                addProduct.ShowDialog();
+                if(worker_grid.Height == 0)
+                {
+                    worker_grid.Height = 700;
+                    Salom.Height = 0;
+                    await Load(_products: true);
+                }
+                else
+                {
+                    AddProduct addProduct = new AddProduct(MainWindow, this, SubCategoryId);
+                    addProduct.ShowDialog();
+                }
             }
         }
 
@@ -270,7 +274,7 @@ namespace ShopSystem.Pages
 
         private void addCategory_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (addCategory_btn.Content.ToString() == "+Категория")
+            if (addCategory_btn.Content.ToString() == "+Категория" || addCategory_btn.Content.ToString() == "+Подкатегория")
             {
                 AddCategory addCategory = new AddCategory(MainWindow, this);
                 addCategory.ShowDialog();
@@ -299,7 +303,6 @@ namespace ShopSystem.Pages
                     var _category = db.Categories.First(p => p.Id == _subcategory.ParentId);
                     var shop = db.Shops.First(p => p.Id == ShopId);
                     await Load(false, false, true);
-                    addCategory_btn.Content = "+Продукт";
                     shopName.Text = shop.Name;
                     main_lbl.Content = "Мой магазин: ";
                     categoryname.Text = "   Категория: " + _category.Title;
@@ -313,7 +316,7 @@ namespace ShopSystem.Pages
                     var _category = db.Categories.First(p => p.Id == CategoryId);
                     var shop = db.Shops.First(p => p.Id == ShopId);
                     await Load(false, true, false);
-                    addCategory_btn.Content = "+Категория";
+                    addCategory_btn.Content = "+Подкатегория";
                     subcategoryname.Text = "";
                     shopName.Text = shop.Name;
                     main_lbl.Content = "Мой магазин: ";
@@ -344,7 +347,8 @@ namespace ShopSystem.Pages
                 var _category = db.Categories.First(p => p.Id == _subcategory.ParentId);
                 var shop = db.Shops.First(p => p.Id == ShopId);
                 await Load(false, true, false);
-                addCategory_btn.Content = "+Категория";
+                addCategory_btn.Content = "+Подкатегория";
+                addCategory_btn.Visibility = Visibility.Visible;
                 subcategoryname.Text = "";
                 shopName.Text = shop.Name;
                 main_lbl.Content = "Мой магазин: ";
@@ -359,6 +363,7 @@ namespace ShopSystem.Pages
                 {
                     await Load(true, false, false);
                     addCategory_btn.Content = "+Категория";
+                    addCategory_btn.Visibility = Visibility.Visible;
                     main_lbl.Content = "Мой магазин: ";
                     var shop = db.Shops.First(p => p.Id == ShopId);
                     categoryname.Text = "";
@@ -378,6 +383,11 @@ namespace ShopSystem.Pages
                     Page_Loaded(false, true);
                 }
             }
+        }
+
+        private void back_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Back();
         }
     }
 }

@@ -30,25 +30,38 @@ namespace ShopSystem.Pages
             DataModel = model;
             StoragesPage = storages;
             Owner = main;
+            category_name_lbl.Content = "Категория: " + model.Категория;
+            subcategory_name_lbl.Content = "Подкатегория: " + model.Подкатегория;
             Price_come_txt.Text = model.Прибывшая.ToString();
             Price_go_txt.Text = model.Текущая.ToString();
-            old_number.Content = $"Доступное количество: {model.Количство}";
-            product_name_lbl.Content = model.Продукт;
+            old_number.Content = $"Количство на складе: {model.Количство}";
+            product_name_lbl.Content = "Название продукта: " + model.Продукт;
         }
 
         private void Load()
         {
             var db = new AppDbContext();
             var product = db.Products.Where(p => p.Barcode == DataModel.Штрихкод).First();
+            
+            var addedproduct = new AddedProduct()
+            {
+                Id = product.Id,
+                Title = product.Title,
+                Count = product.Count,
+                AddedCount = int.Parse(Count_txt.Text),
+                Added_time = DateTime.Now,
+                PriceCome = product.PriceCome,
+                PriceGo = product.PriceGo,
+                NewPriceCome = double.Parse(Price_come_txt.Text),
+                NewPriceGo = double.Parse(Price_go_txt.Text)
+            };
+            db.AdditionalProducts.Add(addedproduct);
             product.PriceCome = double.Parse(Price_come_txt.Text);
             product.PriceGo = double.Parse(Price_go_txt.Text);
             product.Count = int.Parse(Count_txt.Text) + DataModel.Количство;
             db.SaveChanges();
             StoragesPage.Load();
             Close();
-            StoragesPage.edit_btn.Visibility = Visibility.Collapsed;
-            StoragesPage.delete_btn.Visibility = Visibility.Collapsed;
-            StoragesPage.only_add.Visibility = Visibility.Collapsed;
         }
 
         private void txt_PreviewTextInput(object sender, TextCompositionEventArgs e)

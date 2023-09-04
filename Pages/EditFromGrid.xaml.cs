@@ -55,9 +55,6 @@ namespace ShopSystem.Pages
         {
             Edit();
             Close();
-            _storagesPage.edit_btn.Visibility = Visibility.Collapsed;
-            _storagesPage.delete_btn.Visibility = Visibility.Collapsed;
-            _storagesPage.only_add.Visibility = Visibility.Collapsed;
         }
 
         private void categoryName_txt_PreviewTextInput(object sender, TextCompositionEventArgs e)
