@@ -10,9 +10,9 @@ namespace ShopSystem.Pages
     /// </summary>
     public partial class CreateWindow : Window
     {
-        ShopsPage ShopsPage { get; set; }
+        WorkerPage ShopsPage { get; set; }
 
-        public CreateWindow(MainWindow main, ShopsPage shopsPage)
+        public CreateWindow(MainWindow main, WorkerPage shopsPage)
         {
             InitializeComponent();
             Owner = main;

@@ -34,11 +34,11 @@ namespace ShopSystem.Pages
                 id.Content = value;
             }
         }
-        ShopsPage shopsPage { get; set; }
-        public CategoryControl(ShopsPage shopsPage) 
+        WorkerPage workerPage;
+        public CategoryControl(WorkerPage worker) 
         { 
             InitializeComponent();
-            this.shopsPage = shopsPage;
+            workerPage = worker;
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -47,22 +47,24 @@ namespace ShopSystem.Pages
 
             if (query.Subcategories.Any(x => x.Id == (Guid)id.Content))
             {
-                 shopsPage.addCategory_btn.Content = "+Продукт";
-                shopsPage.subcategoryname.Text = $"   Подкатегория: {category_lbl.Text}";
-                shopsPage.Load((Guid)id.Content,false,false,true);
+                workerPage.addCategory_btn.Content = "+Продукт";
+                workerPage.subcategoryname.Text = $"   Подкатегория: {category_lbl.Text}";
+                workerPage.Load(false,false,true);
+                workerPage.SubCategoryId = (Guid)id.Content;
             }
             else if (query.Categories.Any(x => x.Id == (Guid)id.Content))
             {
-                shopsPage.addCategory_btn.Content = "+Категория";
-                shopsPage.categoryname.Text = $"   Категория: {category_lbl.Text}";
-                shopsPage.Load((Guid)id.Content,false,true,false);
+                workerPage.addCategory_btn.Content = "+Категория";
+                workerPage.categoryname.Text = $"   Категория: {category_lbl.Text}";
+                workerPage.Load(false,true,false);
+                workerPage.CategoryId = (Guid)id.Content;
             }
         }
 
         private void editbtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var lastName = category_lbl.Text;
-            UpdateWindow updateWindow = new UpdateWindow((Guid)id.Content, shopsPage, lastName, "Category");
+            UpdateWindow updateWindow = new UpdateWindow((Guid)id.Content, workerPage, lastName, "Category");
             updateWindow.ShowDialog();
         }
 
@@ -91,7 +93,7 @@ namespace ShopSystem.Pages
                         }
                         query.Categories.Remove(category);
                         query.SaveChanges();
-                        shopsPage.Load(category.Id, true, false, false);
+                        workerPage.Load(true, false, false);
                     }
                 }
                
@@ -109,7 +111,7 @@ namespace ShopSystem.Pages
                     
                     query.Subcategories.Remove(subcategory);
                     query.SaveChanges();
-                    shopsPage.Load(subcategory.Id, false, true, false);
+                    workerPage.Load(false, true, false);
                 }
             }            
         }

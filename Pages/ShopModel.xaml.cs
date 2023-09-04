@@ -13,13 +13,11 @@ namespace ShopSystem.Pages
     /// </summary>
     public partial class ShopModel : UserControl
     {
-        ShopsPage shopsPage;
         WorkerPage workerPage;
-        public ShopModel(WorkerPage worker, ShopsPage shopsPage)
+        public ShopModel(WorkerPage worker)
         {
             InitializeComponent();
             workerPage = worker;
-            this.shopsPage = shopsPage;
         }
 
         public object labelcha0
@@ -76,14 +74,14 @@ namespace ShopSystem.Pages
                     }
                 }
                 query.SaveChanges();
-                shopsPage.Page_Loaded(_showShops: true);
+                workerPage.Page_Loaded(_showShops: true);
             }
         }
 
         private void editbtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var lastName = label_name.Text;
-            UpdateWindow updateWindow = new UpdateWindow((Guid)id.Content, shopsPage, lastName, "Shop");
+            UpdateWindow updateWindow = new UpdateWindow((Guid)id.Content, workerPage, lastName, "Shop");
             updateWindow.addtxt.Select(0, lastName.Length);
             updateWindow.ShowDialog();
         }
@@ -93,11 +91,13 @@ namespace ShopSystem.Pages
         {
             workerPage.sklad_btn.Visibility = Visibility.Visible;
             workerPage.shops_btn.Visibility = Visibility.Hidden;
+            workerPage.nazad_btn.Visibility = Visibility.Visible;
             workerPage.addproduct_btn.Visibility = Visibility.Visible;
-            shopsPage.main_lbl.Content = "Мой магазин: ";
-            shopsPage.shopName.Text = label_name.Text;
-            shopsPage.shopId = (Guid)id.Content;
-            shopsPage.Load(null, true, false, false);
+            workerPage.ShopId = (Guid)id.Content;
+            workerPage.main_lbl.Content = "Мой магазин: ";
+            workerPage.shopName.Text = label_name.Text;
+            workerPage.ShopId = (Guid)id.Content;
+            workerPage.Load(true, false, false);
         }
     }
 }

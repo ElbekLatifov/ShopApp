@@ -16,15 +16,13 @@ namespace ShopSystem.Pages
     /// </summary>
     public partial class AddProduct : Window
     {
-        ShopsPage shopsPage;
+        WorkerPage shopsPage;
         Guid? CategoryId;
-        public AddProduct(MainWindow main, ShopsPage shopsPage, Guid? CategoryId)
+        public AddProduct(MainWindow main, WorkerPage shopsPage, Guid? CategoryId)
         {
             InitializeComponent();
             this.shopsPage = shopsPage;
             this.CategoryId = CategoryId;
-            category_name.Text = shopsPage.categoryname.Text;
-            subcategory_name.Text = shopsPage.subcategoryname.Text;
             categoryName_txt.Select(0, 0);
             Owner = main;
         }
@@ -98,7 +96,7 @@ namespace ShopSystem.Pages
 
             var product = new Product()
             {
-                ShopId = shopsPage.shopId,
+                ShopId = shopsPage.ShopId,
                 Categoryid = CategoryId,
                 Title = categoryName_txt.Text,
                 PriceCome = double.Parse(Price_come_txt.Text),
@@ -111,7 +109,7 @@ namespace ShopSystem.Pages
             product.Barcode = GetBarcode(product.Id);
             db.Products.Update(product);
             db.SaveChanges();
-            shopsPage.Load(CategoryId,false,false,true);
+            shopsPage.ShopsPage(_category: false, _subcategory: false, _products: true);
             Close();
         }
 

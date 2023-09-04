@@ -1,260 +1,341 @@
-﻿using ShopSystem.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
+﻿//using ShopSystem.Context;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Windows;
+//using System.Windows.Controls;
 
-namespace ShopSystem.Pages
-{
-    /// <summary>
-    /// Логика взаимодействия для ShopsPage.xaml
-    /// </summary>
-    public partial class ShopsPage : Page
-    {
-        MainWindow MainWindow { get; set; }
-        WorkerPage workerPage;
-        public Guid? ids;
-        public Guid shopId;
-        public ShopsPage(MainWindow main, WorkerPage worker, bool allShops = false,
-            bool myShops = false, Guid? ids = null)
-        {
-            InitializeComponent();
-            workerPage = worker;    
-            MainWindow = main;
-            Page_Loaded(myShops, allShops);
-            this.ids = ids;
+//namespace ShopSystem.Pages
+//{
+//    /// <summary>
+//    /// Логика взаимодействия для ShopsPage.xaml
+//    /// </summary>
+//    public partial class ShopsPage : Page
+//    {
+//        MainWindow MainWindow { get; set; }
+//        WorkerPage workerPage;
+//        public Guid? ids;
+//        public Guid shopId;
+//        public ShopsPage(MainWindow main, WorkerPage worker, bool allShops = false, bool isAfter = false, bool isAfter2 = false,
+//            bool myShops = false, Guid? ids = null, bool isBack = false, bool _category = false, bool _subcategory = false, bool _products = false)
+//        {
+//            InitializeComponent();
+//            workerPage = worker;    
+//            MainWindow = main;
+//            Page_Loaded(myShops, allShops);
+//            ShowCategoriesAfter(isAfter);
+//            Back(isBack);
+//            Load(ids, _category, _subcategory, _products);
+//            this.ids = ids;
 
-        }
+//        }
 
-        private void Visiblb()
-        {
-            cat_steak.Visibility = Visibility.Visible;
-            search_steak.Visibility = Visibility.Collapsed;
-        }
-        private void NoVisiblb()
-        {
-            cat_steak.Visibility= Visibility.Collapsed;
-            search_steak.Visibility = Visibility.Visible;
-        }
+//        public void ShowCategoriesAfter(bool isAfetr, bool isAfter2 = false)
+//        {
+//            var db = new AppDbContext();
+//            if (isAfetr)
+//            {
+//                workerPage.addproduct_btn
+//                    .Visibility = Visibility.Visible;
+//                workerPage.storage_btn.Visibility = Visibility.Visible;
+//                workerPage.stories_btn.Visibility = Visibility.Hidden;
+//                Visiblb();
+//                if(workerPage.ShopId != null)
+//                {
+//                    shopId = workerPage.ShopId;
+//                    var shop = db.Shops.First(p=>p.Id == shopId);
+//                    shopName.Text = shop.Name;  
+//                    main_lbl.Content = shop.Name;   
+//                }
+//                var categories = db.Categories.OrderByDescending(p => p.Created_time).ToList();
+//                var categoriesList = new List<CategoryControl>();
+//                foreach (var category in categories)
+//                {
+//                    CategoryControl categoryModel = new CategoryControl(workerPage, this);
 
-        public void Load(Guid? id, bool _category=false, bool _subcategory=false, bool _products=false)
-        {
-            Visiblb();
-            ids = id;
-            var db = new AppDbContext();
+//                    categoryModel.Width = 200;
+//                    categoryModel.Height = 120;
+//                    categoryModel.labelcha0 = category.Title;
+//                    categoryModel.labelcha1 = category.Id;
+//                    categoriesList.Add(categoryModel);
+//                }
 
-            if(_category)
-            {
-                var categories = db.Categories.OrderByDescending(p => p.Created_time).ToList();
-                var categoriesList = new List<CategoryControl>();
+//                shoplists.ItemsSource = categoriesList;
+//            }
+//            if(isAfter2)
+//            {
+//                var subcategories = db.Subcategories.Where(p => p.ParentId == ids).OrderByDescending(p => p.Created_time).ToList();
+//                var categoriesList = new List<CategoryControl>();
 
-                foreach (var category in categories)
-                {
-                    CategoryControl categoryModel = new CategoryControl(this);
+//                foreach (var subcategory in subcategories)
+//                {
+//                    CategoryControl categoryModel = new CategoryControl(workerPage, this);
 
-                    categoryModel.Width = 200;
-                    categoryModel.Height = 120;
-                    categoryModel.labelcha0 = category.Title;
-                    categoryModel.labelcha1 = category.Id;
-                    categoriesList.Add(categoryModel);
-                }
+//                    categoryModel.Width = 200;
+//                    categoryModel.Height = 120;
+//                    categoryModel.labelcha0 = subcategory.Title;
+//                    categoryModel.labelcha1 = subcategory.Id;
+//                    categoriesList.Add(categoryModel);
+//                }
 
-                shoplists.ItemsSource = categoriesList;
-            }
+//                shoplists.ItemsSource = categoriesList;
+//            }
+//        }
 
-            if(_subcategory)
-            {
-                var subcategories = db.Subcategories.Where(p=>p.ParentId == ids).OrderByDescending(p => p.Created_time).ToList();
-                var categoriesList = new List<CategoryControl>();
+//        private void Visiblb()
+//        {
+//            cat_steak.Visibility = Visibility.Visible;
+//            search_steak.Visibility = Visibility.Collapsed;
+//        }
+//        private void NoVisiblb()
+//        {
+//            cat_steak.Visibility= Visibility.Collapsed;
+//            search_steak.Visibility = Visibility.Visible;
+//        }
 
-                foreach (var subcategory in subcategories)
-                {
-                    CategoryControl categoryModel = new CategoryControl(this);
+//        public void Load(Guid? id, bool _category=false, bool _subcategory=false, bool _products=false)
+//        {
+//            Visiblb();
+//            ids = id;
+//            var db = new AppDbContext();
 
-                    categoryModel.Width = 200;
-                    categoryModel.Height = 120;
-                    categoryModel.labelcha0 = subcategory.Title;
-                    categoryModel.labelcha1 = subcategory.Id;
-                    categoriesList.Add(categoryModel);
-                }
+//            if(_category)
+//            {
+//                var categories = db.Categories.OrderByDescending(p => p.Created_time).ToList();
+//                var categoriesList = new List<CategoryControl>();
 
-                shoplists.ItemsSource = categoriesList;
-            }
+//                foreach (var category in categories)
+//                {
+//                    CategoryControl categoryModel = new CategoryControl(workerPage, this);
 
-            if(_products)
-            {
-                var products = db.Products.Where(p => p.Categoryid == id && p.ShopId == shopId).OrderByDescending(p => p.Created_time).ToList();
-                var productsBox = new List<ProductControl>();
+//                    categoryModel.Width = 200;
+//                    categoryModel.Height = 120;
+//                    categoryModel.labelcha0 = category.Title;
+//                    categoryModel.labelcha1 = category.Id;
+//                    categoriesList.Add(categoryModel);
+//                }
 
-                foreach (var product in products)
-                {
-                    ProductControl productModel = new ProductControl();
+//                shoplists.ItemsSource = categoriesList;
+//            }
 
-                    productModel.Width = 150;
-                    productModel.Height = 200;
-                    productModel.Name = product.Title;
-                    var formet = (String.Format("{0:N}", product.PriceGo));
-                    productModel.Price = formet.Remove(formet.Length - 3);
-                    productModel.Id = product.Id;
+//            if(_subcategory)
+//            {
+//                var subcategories = db.Subcategories.Where(p=>p.ParentId == ids).OrderByDescending(p => p.Created_time).ToList();
+//                var categoriesList = new List<CategoryControl>();
 
-                    productsBox.Add(productModel);
-                }
+//                foreach (var subcategory in subcategories)
+//                {
+//                    CategoryControl categoryModel = new CategoryControl(workerPage, this);
 
-                shoplists.ItemsSource = productsBox;
-            }
-        }
+//                    categoryModel.Width = 200;
+//                    categoryModel.Height = 120;
+//                    categoryModel.labelcha0 = subcategory.Title;
+//                    categoryModel.labelcha1 = subcategory.Id;
+//                    categoriesList.Add(categoryModel);
+//                }
 
-        public void Page_Loaded(bool _myshops=false, bool _showShops=false)
-        {
-            main_lbl.Content = "Мои магазины";
-            NoVisiblb();
-            if (_myshops)
-            {
-                var query = new AppDbContext();
-                var owner = Properties.Settings.Default.Name;
-                List<ShopModel> shopModels = new List<ShopModel>();
+//                shoplists.ItemsSource = categoriesList;
+//            }
 
-                var shops = query.Shops.Where(p => p.Owner == owner).OrderByDescending(p => p.Created_time).ToList();
+//            if(_products)
+//            {
+//                var products = db.Products.Where(p => p.Categoryid == id && p.ShopId == shopId).OrderByDescending(p => p.Created_time).ToList();
+//                var productsBox = new List<ProductControl>();
 
-                foreach (var shop in shops)
-                {
-                    ShopModel shopModel = new ShopModel(workerPage, this);
+//                foreach (var product in products)
+//                {
+//                    ProductControl productModel = new ProductControl();
 
-                    shopModel.Width = 200;
-                    shopModel.Height = 70;
-                    shopModel.labelcha0 = shop.Id;
-                    shopModel.labelcha1 = shop.Name;
-                    shopModels.Add(shopModel);
-                }
+//                    productModel.Width = 150;
+//                    productModel.Height = 200;
+//                    productModel.Name = product.Title;
+//                    var formet = (String.Format("{0:N}", product.PriceGo));
+//                    productModel.Price = formet.Remove(formet.Length - 3);
+//                    productModel.Id = product.Id;
 
-                shoplists.ItemsSource = shopModels;
-            }
-            if (_showShops)
-            {
-                var query = new AppDbContext();
-                List<ShopModel> shopModels = new List<ShopModel>();
+//                    productsBox.Add(productModel);
+//                }
 
-                var shops = query.Shops.OrderByDescending(p=>p.Created_time).ToList();
+//                shoplists.ItemsSource = productsBox;
+//            }
+//        }
 
-                foreach (var shop in shops)
-                {
-                    ShopModel shopModel = new ShopModel(workerPage, this);
+//        public void Page_Loaded(bool _myshops=false, bool _showShops=false)
+//        {
+//            main_lbl.Content = "Мои магазины";
+//            NoVisiblb();
+//            if (_myshops)
+//            {
+//                var query = new AppDbContext();
+//                var owner = Properties.Settings.Default.Name;
+//                List<ShopModel> shopModels = new List<ShopModel>();
 
-                    shopModel.Width = 200;
-                    shopModel.Height = 70;
-                    shopModel.labelcha0 = shop.Id;
-                    shopModel.labelcha1 = shop.Name;
-                    shopModels.Add(shopModel);
-                }
+//                var shops = query.Shops.Where(p => p.Owner == owner).OrderByDescending(p => p.Created_time).ToList();
 
-                shoplists.ItemsSource = shopModels;
-            }
-        }
+//                foreach (var shop in shops)
+//                {
+//                    ShopModel shopModel = new ShopModel(workerPage, this);
 
-        private void search_btn_Click(object sender, RoutedEventArgs e)
-        {
-            if (String.IsNullOrEmpty(search_txt.Text))
-            {
-                return;
-            }
-            var shopModels = new List<ShopModel>();
-            var query = new AppDbContext();
+//                    shopModel.Width = 200;
+//                    shopModel.Height = 70;
+//                    shopModel.labelcha0 = shop.Id;
+//                    shopModel.labelcha1 = shop.Name;
+//                    shopModels.Add(shopModel);
+//                }
 
-            var shops = from b in query.Shops
-                        where b.Name.Contains(search_txt.Text)
-                        select b;
+//                shoplists.ItemsSource = shopModels;
+//            }
+//            if (_showShops)
+//            {
+//                var query = new AppDbContext();
+//                List<ShopModel> shopModels = new List<ShopModel>();
 
-            foreach (var shop in shops)
-            {
-                ShopModel shopModel = new ShopModel(workerPage, this);
+//                var shops = query.Shops.OrderByDescending(p=>p.Created_time).ToList();
 
-                shopModel.Width = 200;
-                shopModel.Height = 70;
-                shopModel.labelcha0 = shop.Id;
-                shopModel.labelcha1 = shop.Name;
-                shopModels.Add(shopModel);
-            }
+//                foreach (var shop in shops)
+//                {
+//                    ShopModel shopModel = new ShopModel(workerPage, this);
 
-            shoplists.ItemsSource = shopModels;
-        }
+//                    shopModel.Width = 200;
+//                    shopModel.Height = 70;
+//                    shopModel.labelcha0 = shop.Id;
+//                    shopModel.labelcha1 = shop.Name;
+//                    shopModels.Add(shopModel);
+//                }
 
-        private void addbtn_Click(object sender, RoutedEventArgs e)
-        {
-            CreateWindow createWindow = new CreateWindow(MainWindow, this);
-            createWindow.ShowDialog();
-        }
+//                shoplists.ItemsSource = shopModels;
+//            }
+//        }
 
-        private void search_txt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var shopModels = new List<ShopModel>();
-            var query = new AppDbContext();
+//        private void search_btn_Click(object sender, RoutedEventArgs e)
+//        {
+//            if (String.IsNullOrEmpty(search_txt.Text))
+//            {
+//                return;
+//            }
+//            var shopModels = new List<ShopModel>();
+//            var query = new AppDbContext();
 
-            var shops = from b in query.Shops
-                        where b.Name.Contains(search_txt.Text)
-                        select b;
+//            var shops = from b in query.Shops
+//                        where b.Name.Contains(search_txt.Text)
+//                        select b;
 
-            foreach (var shop in shops)
-            {
-                ShopModel shopModel = new ShopModel(workerPage, this);
+//            foreach (var shop in shops)
+//            {
+//                ShopModel shopModel = new ShopModel(workerPage, this);
 
-                shopModel.Width = 200;
-                shopModel.Height = 70;
-                shopModel.labelcha0 = shop.Id;
-                shopModel.labelcha1 = shop.Name;
-                shopModels.Add(shopModel);
-            }
+//                shopModel.Width = 200;
+//                shopModel.Height = 70;
+//                shopModel.labelcha0 = shop.Id;
+//                shopModel.labelcha1 = shop.Name;
+//                shopModels.Add(shopModel);
+//            }
 
-            shoplists.ItemsSource = shopModels;
-        }
+//            shoplists.ItemsSource = shopModels;
+//        }
 
-        private void addCategory_btn_Click(object sender, RoutedEventArgs e)
-        {
-            if(addCategory_btn.Content.ToString() == "+Категория")
-            {
-                AddCategory addCategory = new AddCategory(MainWindow, this);
-                addCategory.ShowDialog();
-            }
-            if(addCategory_btn.Content.ToString() == "+Продукт")
-            {
-                AddProduct addProduct = new AddProduct(MainWindow, this, ids);
-                addProduct.ShowDialog();
-            }
+//        private void addbtn_Click(object sender, RoutedEventArgs e)
+//        {
+//            CreateWindow createWindow = new CreateWindow(MainWindow, this);
+//            createWindow.ShowDialog();
+//        }
+
+//        private void search_txt_TextChanged(object sender, TextChangedEventArgs e)
+//        {
+//            var shopModels = new List<ShopModel>();
+//            var query = new AppDbContext();
+
+//            var shops = from b in query.Shops
+//                        where b.Name.Contains(search_txt.Text)
+//                        select b;
+
+//            foreach (var shop in shops)
+//            {
+//                ShopModel shopModel = new ShopModel(workerPage, this);
+
+//                shopModel.Width = 200;
+//                shopModel.Height = 70;
+//                shopModel.labelcha0 = shop.Id;
+//                shopModel.labelcha1 = shop.Name;
+//                shopModels.Add(shopModel);
+//            }
+
+//            shoplists.ItemsSource = shopModels;
+//        }
+
+//        private void addCategory_btn_Click(object sender, RoutedEventArgs e)
+//        {
+//            if(addCategory_btn.Content.ToString() == "+Категория")
+//            {
+//                AddCategory addCategory = new AddCategory(MainWindow, this);
+//                addCategory.ShowDialog();
+//            }
+//            if(addCategory_btn.Content.ToString() == "+Продукт")
+//            {
+//                AddProduct addProduct = new AddProduct(MainWindow, workerPage, ids);
+//                addProduct.ShowDialog();
+//            }
             
-        }
+//        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var db = new AppDbContext();
+//        public void Back(bool isBack)
+//        {
+//            var db = new AppDbContext();
+//            if(isBack)
+//            {
+//                if(workerPage.SubCategoryId != null)
+//                {
+//                    ids = workerPage.SubCategoryId;
+//                    workerPage.SubCategoryId = null;
+//                }
+//                else if(workerPage.CategoryId != null)
+//                {
+//                    ids = workerPage.CategoryId;
+//                    workerPage.CategoryId = null;
+//                }
+//                if (db.Subcategories.Any(p => p.Id == ids))
+//                {
+//                    var _subcategory = db.Subcategories.First(p => p.Id == ids);
+//                    var _category = db.Categories.First(p => p.Id == _subcategory.ParentId);
+//                    var shop = db.Shops.First(p => p.Id == workerPage.ShopId);
+//                    Load(_subcategory.ParentId, false, true, false);
+//                    addCategory_btn.Content = "+Категория";
+//                    subcategoryname.Text = "";
+//                    shopName.Text = shop.Name;
+//                    main_lbl.Content = "Мой магазин: ";
+//                    categoryname.Text = "   Категория: " + _category.Title;
+//                    var category = db.Categories.First();
+//                    ids = category.Id;
+//                }
+//                else
+//                {
+//                    if (db.Categories.Any(p => p.Id == ids))
+//                    {
+//                        Load(ids, true, false, false);
+//                        addCategory_btn.Content = "+Категория";
+//                        main_lbl.Content = "Мой магазин: ";
+//                        var shop = db.Shops.First(p=>p.Id == workerPage.ShopId);
+//                        categoryname.Text = "";
+//                        shopName.Text = shop.Name;
+//                        ids = null;
+//                    }
+//                    else
+//                    {
+//                        main_lbl.Content = "Мои магазины";
+//                        shopName.Text = "";
+//                        workerPage.shops_btn.Visibility = Visibility.Visible;
+//                        workerPage.addproduct_btn.Visibility = Visibility.Hidden;
+//                        workerPage.nazad_btn.Visibility = Visibility.Hidden;
+//                        workerPage.sklad_btn.Visibility = Visibility.Hidden;
+//                        Page_Loaded(false, true);
+//                    }
+//                }
+//            }
+//        }
 
-            if (db.Subcategories.Any(p => p.Id == ids))
-            {
-                var _subcategory = db.Subcategories.First(p => p.Id == ids);
-                Load(_subcategory.ParentId, false, true, false);
-                addCategory_btn.Content = "+Категория";
-                subcategoryname.Text = "";
-                var category = db.Categories.First();
-                ids = category.Id;
-            }
-            else
-            {
-                if(db.Categories.Any(p => p.Id == ids))
-                {
-                    Load(ids, true, false, false);
-                    addCategory_btn.Content = "+Категория";
-                    categoryname.Text = "";
-                    ids = null;
-                }
-                else
-                {
-                    NavigationService.Navigate(new ShopsPage(MainWindow, workerPage, allShops: true));
-                    main_lbl.Content = "Мои магазины";
-                    shopName.Text = "";
-                    workerPage.shops_btn.Visibility = Visibility.Visible;
-                    workerPage.addproduct_btn.Visibility = Visibility.Hidden;
-                    workerPage.sklad_btn.Visibility = Visibility.Hidden;
-                }
-            }
-        }
-    }
-}
+//        private void Button_Click(object sender, RoutedEventArgs e)
+//        {
+//            Back(true);
+//        }
+//    }
+//}

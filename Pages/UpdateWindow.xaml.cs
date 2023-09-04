@@ -12,10 +12,10 @@ namespace ShopSystem.Pages
     /// </summary>
     public partial class UpdateWindow : Window
     {
-        ShopsPage _shopPage;
+        WorkerPage _shopPage;
         Guid id;
         string type;
-        public UpdateWindow(Guid id, ShopsPage shopsPage, string lastname, string type)
+        public UpdateWindow(Guid id, WorkerPage shopsPage, string lastname, string type)
         {
             InitializeComponent();
             _shopPage = shopsPage;
@@ -45,7 +45,7 @@ namespace ShopSystem.Pages
             try
             {
 
-                var shop = query.Shops.First(p => p.Id == _shopPage.shopId);
+                var shop = query.Shops.First(p => p.Id == _shopPage.ShopId);
 
                 shop.Name = addtxt.Text;
 
@@ -76,7 +76,7 @@ namespace ShopSystem.Pages
                     category.Title = addtxt.Text;
                     query.Categories.Update(category);
                     query.SaveChanges();
-                    _shopPage.Load(category.Id, true, false, false);
+                    _shopPage.Load(true, false, false);
                     Close();
                 }
                 else if (query.Subcategories.Any(x => x.Id == id))
@@ -85,7 +85,7 @@ namespace ShopSystem.Pages
                     subcategory.Title = addtxt.Text;
                     query.Subcategories.Update(subcategory);
                     query.SaveChanges();
-                    _shopPage.Load(subcategory.ParentId, false, true, false);
+                    _shopPage.Load(false, true, false);
                     Close();
                 }
             }

@@ -22,9 +22,9 @@ namespace ShopSystem.Pages
     /// </summary>
     public partial class AddCategory : Window
     {
-        ShopsPage page;
+        WorkerPage page;
         MainWindow MainWindow;
-        public AddCategory(MainWindow main, ShopsPage categoriesPage)
+        public AddCategory(MainWindow main, WorkerPage categoriesPage)
         {
             InitializeComponent();
             MainWindow = main;
@@ -37,31 +37,31 @@ namespace ShopSystem.Pages
         {
             if (categoryName_txt.Text.Length == 0) { MessageBox.Show("Заполните необходимые поля"); return; }
             var db = new AppDbContext();
-            if(db.Categories.Any(p=>p.Id==page.ids))
+            if(db.Categories.Any(p=>p.Id==page.CategoryId))
             {
                 var subcategory = new Subcategory()
                 {
-                    ShopId = page.shopId,
+                    ShopId = page.ShopId,
                     Created_time = System.DateTime.UtcNow,
                     Title = categoryName_txt.Text,
-                    ParentId = page.ids
+                    ParentId = page.CategoryId
                 };
                 db.Subcategories.Add(subcategory);
                 db.SaveChanges();
-                page.Load(page.ids,false,true,false);
+                page.Load(false,true,false);
                 Close();
             }
             else
             {
                 var category = new Category()
                 {
-                    ShopId = page.shopId,
+                    ShopId = page.ShopId,
                     Created_time = System.DateTime.UtcNow,
                     Title = categoryName_txt.Text
                 };
                 db.Categories.Add(category);
                 db.SaveChanges();
-                page.Load(page.ids,true,false,false);
+                page.Load(true,false,false);
                 Close();
             }
         }
