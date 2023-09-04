@@ -1,0 +1,21 @@
+﻿<Window x:Class="ShopSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShopSystem"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="730" Width="1100"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        x:Name="MainWin">
+    <Grid>
+        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Top" Background="Navy" Opacity="1" Height="30" Width="1100" MouseDown="DockPanel_MouseDown">
+            <Button x:Name="exit_btn" Style="{StaticResource MaterialDesignFlatButton}" Content="X" Click="Page1_Click" Width="54" Background="Navy" FontSize="20" FontFamily="Engravers MT" 
+                    FontWeight="Bold" Cursor="Hand" MouseEnter="exit_btn_MouseEnter" MouseLeave="exit_btn_MouseLeave" 
+                    BorderBrush="Navy" Margin="305,0,0,0" HorizontalAlignment="Right" Foreground="White"/>
+        </DockPanel>
+        <Frame Background="Transparent" x:Name="mainframe" Margin="0,30,0,0" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

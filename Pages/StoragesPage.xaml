@@ -1,0 +1,72 @@
+﻿<Page x:Class="ShopSystem.Pages.StoragesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ShopSystem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="915"
+      Title="StoragesPage" Background="Transparent">
+
+    <Grid Background="AntiqueWhite">
+        <StackPanel>
+            <StackPanel Height="55" Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                         <ColumnDefinition Width="150"/>
+                         <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                    <Button x:Name="read_btn" Width="90" Height="40" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="read_btn_Click">
+                        <md:PackIcon Kind="Reload"/>
+                    </Button>
+                    <Button x:Name="add_btn" Grid.Column="1" Height="40" Width="90" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="add_btn_Click">
+                        <md:PackIcon Kind="AddBox"/>
+                    </Button>
+                    <Button x:Name="edit_btn" Grid.Column="2"  Width="90" Height="40" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="edit_btn_Click">
+                        <md:PackIcon Kind="Edit"/>
+                    </Button>
+                    <Button x:Name="delete_btn" Grid.Column="3" Height="40" Width="90" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="delete_btn_Click">
+                        <md:PackIcon Kind="Delete"/>
+                    </Button>
+                    
+
+                </Grid>
+            </StackPanel>
+            
+            <Grid Height="645">
+                <DataGrid HorizontalAlignment="Left" Width="915" RowHeight="35"  CellStyle="{DynamicResource MaterialDesignDataGridCell}" 
+                          Background="White" x:Name="storage_data" AutoGenerateColumns="True" 
+                          SelectionUnit="FullRow" 
+                          GridLinesVisibility="All" ColumnWidth="auto" 
+                          CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" BorderThickness="3" 
+                          CanUserAddRows="False" CanUserDeleteRows="False" VerticalGridLinesBrush="Aqua" VerticalScrollBarVisibility="Auto" 
+                          HorizontalGridLinesBrush="Aquamarine" Style="{StaticResource MaterialDesignDataGrid}" Cursor="Hand" FontFamily="Verdana" 
+                          FontWeight="Bold" VerticalContentAlignment="Center" AreRowDetailsFrozen="True" IsReadOnly="True" AutomationProperties.IsRowHeader="True" SelectionMode="Single" HorizontalContentAlignment="Center" SelectionChanged="storage_data_SelectionChanged">
+                            <!--<DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightSkyBlue"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                    </DataGrid.Resources>-->
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="SkyBlue"/>
+                                    <Setter Property="Foreground" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>

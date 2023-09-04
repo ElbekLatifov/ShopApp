@@ -1,0 +1,32 @@
+﻿<Page x:Name="MainPage" x:Class="ShopSystem.Pages.MainMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ShopSystem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1100"
+      Title="MainMenuPage" KeyDown="MainPage_KeyDown">
+
+    <Grid>
+        <Border Background="GhostWhite" CornerRadius="0" Cursor=""/>
+        <StackPanel Width="700" Height="320" Margin="0,80,0,10" HorizontalAlignment="Center">
+            <Grid HorizontalAlignment="Center" Width="700">
+                <md:PackIcon Kind="user" Width="30" Height="50" Margin="30 15 0 0"/>
+                <TextBox md:HintAssist.Hint="Ваш логин" md:HintAssist.IsFloating="True" x:Name="register_txt" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" Height="60" FontSize="24" FontFamily="Times New Roman" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"/>
+            </Grid>
+            <Grid Margin="0,20,0,0" HorizontalAlignment="Center" Width="700">
+                <md:PackIcon Kind="lock" Width="30" Height="50" Margin="30 15 0 0"/>
+                <TextBox x:Name="parol_tx" HorizontalAlignment="Center" Height="60" Margin="0,0,0,0" VerticalAlignment="Top" Width="550" MaxLength="20" FontSize="24" FontFamily="Times New Roman" TextChanged="parol_tx_TextChanged" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Visibility="Collapsed"/>
+                <PasswordBox md:HintAssist.Hint="Ваш пароль" md:HintAssist.IsFloating="True" x:Name="parol_txt" HorizontalAlignment="Center" Height="60" Margin="0,0,0,0" VerticalAlignment="Top" Width="550" MaxLength="20" FontSize="24" AllowDrop="True" IsVisibleChanged="parol_txt_IsVisibleChanged" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" FontFamily="Times New Roman"/>
+                <Image x:Name="eye" HorizontalAlignment="Left" Height="30" Margin="600,27,0,0" VerticalAlignment="Top" Width="30" Source="pack://application:,,,/Images/eye open.png" Stretch="Fill" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+            </Grid>
+            <CheckBox x:Name="checkMe" Content="Запомнить меня" HorizontalAlignment="Left" Height="21" Margin="75,20,0,0" VerticalAlignment="Top" Width="115" FontFamily="Impact"/>
+            <Button x:Name="enter_btn" Content="Входить" Background="Black" HorizontalAlignment="Center" Height="60" Margin="0,60,10,0" VerticalAlignment="Top" Width="300" FontSize="34" BorderBrush="Black" Click="enter_btn_Click" FontFamily="Bauhaus 93" RenderTransformOrigin="0,0" Foreground="White"/>
+        </StackPanel>
+        <Label Content="Добро пожаловать" HorizontalAlignment="Center" Height="63" Margin="0,76,0,0" VerticalAlignment="Top" Width="315"  FontSize="30" HorizontalContentAlignment="Center" FontFamily="Book Antiqua"/>
+        <Button Content="Регистрация" Foreground="Black" HorizontalAlignment="Left" Margin="900,20,0,0" VerticalAlignment="Top" Width="163" Height="35" FontSize="24" Click="Button_Click" FontFamily="Impact" Background="GhostWhite" BorderBrush="GhostWhite" BorderThickness="2"/>
+
+    </Grid>
+</Page>
