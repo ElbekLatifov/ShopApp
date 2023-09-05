@@ -75,5 +75,10 @@ namespace ShopSystem.Pages
             editbtn.Visibility= Visibility.Collapsed;
             deletebtn.Visibility= Visibility.Collapsed; 
         }
+
+        private void UserControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainWindow.mainframe.Navigate(new Kassa());
+        }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopSystem.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="70" d:DesignWidth="200" Margin="10" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
+             d:DesignHeight="70" d:DesignWidth="200" Margin="10" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
     <Grid>
         <Border CornerRadius="5" Background="LightCyan" BorderBrush="LightBlue" BorderThickness="2"/>
         <md:PackIcon Height="70" Width="30" VerticalAlignment="Top" Kind="CashRegister" Margin="5 0 0 0"/>

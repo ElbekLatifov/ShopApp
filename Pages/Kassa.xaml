@@ -1,0 +1,45 @@
+﻿<Page x:Class="ShopSystem.Pages.Kassa"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ShopSystem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1100"
+      Title="Kassa">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TabControl Margin="30" Background="GhostWhite">
+            <TabItem Header="Oziq ovqatlar" IsSelected="True" Width="20" HorizontalAlignment="Left">
+            </TabItem>
+            <TabItem Header="Kiyimlar" Width="20" HorizontalAlignment="Left" Margin="0">
+            </TabItem>
+            <TabItem Header="Texnika" Width="20" HorizontalAlignment="Left">
+            </TabItem>
+            <TabItem Header="Hayvonlar" Width="20" HorizontalAlignment="Left">
+            </TabItem>
+            <TabItem Header="Ichimliklar" Width="20" HorizontalAlignment="Left">
+            </TabItem>
+            <TabItem Header="Maishiy" Width="20" HorizontalAlignment="Left">
+            </TabItem>
+        </TabControl>
+        <ScrollViewer x:Name="scrol" Grid.Column="1" Grid.Row="0" Margin="5 20 5 5" Background="WhiteSmoke">
+            <ItemsControl x:Name="cashed_products" Width="{Binding ElementName=scrol, Path=Width}">
+                <WrapPanel Width="{Binding ElementName=cashed_products, Path=Width}"/>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Button Grid.Column="1" Grid.Row="1" Height="80" Content="Оплатить" FontSize="30" Margin="10 0">
+            
+        </Button>
+    </Grid>
+</Page>

@@ -36,7 +36,8 @@ namespace ShopSystem.Pages
         {
             var cashname = addtxt.Text;
             var db = new AppDbContext();
-            if(db.Кассы.Any(p=>p.Name == cashname))
+            var cashs = db.Кассы.Where(p=>p.ShopId == worrker.ShopId).ToList();
+            if(cashs.Any(p=>p.Name == cashname))
             {
                 MessageBox.Show("Касса с таким названием уже существует");
                 return;

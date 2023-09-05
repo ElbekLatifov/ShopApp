@@ -39,7 +39,8 @@ namespace ShopSystem.Pages
             if (categoryName_txt.Text.Length == 0) { MessageBox.Show("Заполните необходимые поля"); return; }
             if(db.Categories.Any(p=>p.Id==page.CategoryId))
             {
-                if(db.Subcategories.Any(db=>db.Title==categoryName_txt.Text))
+                var subcaategories = db.Subcategories.Where(p=>p.ShopId==page.ShopId).ToList();
+                if(subcaategories.Any(db=>db.Title==categoryName_txt.Text))
                 {
                     MessageBox.Show("Такая подкатегория уже существует");
                     return;
@@ -58,7 +59,8 @@ namespace ShopSystem.Pages
             }
             else
             {
-                if (db.Categories.Any(db => db.Title == categoryName_txt.Text))
+                var categories = db.Categories.Where(p=>p.ShopId == page.ShopId).ToList();
+                if (categories.Any(db => db.Title == categoryName_txt.Text))
                 {
                     MessageBox.Show("Такая категория уже существует");
                     return;
