@@ -35,10 +35,15 @@ namespace ShopSystem.Pages
 
         private async void AddCategoryMethod()
         {
-            if (categoryName_txt.Text.Length == 0) { MessageBox.Show("Заполните необходимые поля"); return; }
             var db = new AppDbContext();
+            if (categoryName_txt.Text.Length == 0) { MessageBox.Show("Заполните необходимые поля"); return; }
             if(db.Categories.Any(p=>p.Id==page.CategoryId))
             {
+                if(db.Subcategories.Any(db=>db.Title==categoryName_txt.Text))
+                {
+                    MessageBox.Show("Такая подкатегория уже существует");
+                    return;
+                }
                 var subcategory = new Subcategory()
                 {
                     ShopId = page.ShopId,
@@ -53,6 +58,11 @@ namespace ShopSystem.Pages
             }
             else
             {
+                if (db.Categories.Any(db => db.Title == categoryName_txt.Text))
+                {
+                    MessageBox.Show("Такая категория уже существует");
+                    return;
+                }
                 var category = new Category()
                 {
                     ShopId = page.ShopId,

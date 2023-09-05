@@ -19,7 +19,7 @@
             <Grid>
                     <StackPanel Orientation="Horizontal" Height="50" Margin="0 30 0 0" VerticalAlignment="Top">
                         <Border CornerRadius="5" HorizontalAlignment="Left" Width="5" Name="belgi_moymagazin" Background="Gray"/>
-                        <Button x:Name="shops_btn" Width="177" Background="Transparent" Click="myshops_btn_Click" Height="50" BorderBrush="Transparent" Margin="0 0 0 0" BorderThickness="0,1,0,1" HorizontalContentAlignment="Left" HorizontalAlignment="Left">
+                        <Button x:Name="shops_btn" Width="177" Background="Transparent" Click="myshops_btn_Click" Height="50" BorderBrush="Transparent" Margin="0 0 0 0" BorderThickness="0,1,0,1" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Visibility="Visible">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Cursor="Hand" Width="155">
                                 <md:PackIcon Kind="Home" Height="50" Width="30" Padding="0,0,0,2" VerticalAlignment="Center"/>
                                 <TextBlock x:Name="stories_btn" Background="Transparent" HorizontalAlignment="Left" Text="Мои магазины" TextWrapping="Wrap" Width="100" Height="50" Margin="5,0,5,0"  FontFamily="times new roman" FontSize="15" Padding="0,15,0,0"/>
@@ -28,10 +28,11 @@
                     </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="50" Margin="0 30 0 0" VerticalAlignment="Top">
                         <Border CornerRadius="5" HorizontalAlignment="Left" Width="5" Name="belgi_addproduct" Background="Gray"/>
-                        <Button x:Name="addproduct_btn" Width="177" Background="Transparent" Click="addproduct_btn_Click" Height="50" BorderBrush="Transparent" Margin="0 0 0 0" BorderThickness="0,1,0,1" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Visibility="Hidden">
+                        <Button x:Name="addproduct_btn" Width="177" Background="Transparent" Click="addproduct_btn_Click" Height="50" BorderBrush="Transparent" Margin="0 0 0 0" BorderThickness="0,1,0,1" HorizontalContentAlignment="Left" HorizontalAlignment="Left" 
+                                Visibility="Hidden" Padding=" 15 0 0 0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Cursor="Hand" Width="160">
-                                <md:PackIcon Kind="AddBold" Height="50" Width="30" Padding="0,0,0,2" VerticalAlignment="Center"/>
-                                <TextBlock x:Name="addproduct_txt" Background="Transparent" HorizontalAlignment="Left" Text="Добавить продукт" TextWrapping="Wrap" Width="130" Height="50" Margin="0,0,0,0"  FontFamily="times new roman" FontSize="15" Padding="0,15,0,0"/>
+                                <md:PackIcon Kind="ListBox" Height="50" Width="30" Padding="0,0,0,2" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="addproduct_txt" Background="Transparent" HorizontalAlignment="Left" Text="Продукты" TextWrapping="Wrap" Width="130" Height="50" Margin="5,2,0,0"  FontFamily="times new roman" FontSize="15" Padding="0,15,0,0"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -43,7 +44,16 @@
                                 <TextBlock x:Name="storage_btn" Background="Transparent" HorizontalAlignment="Left" Text="Склад" TextWrapping="Wrap" Width="100" Height="50" Margin="5,0,0,0"  FontFamily="times new roman" FontSize="15" Padding="0,15,0,0"/>
                             </StackPanel>
                         </Button>
-                    </StackPanel>
+                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="50" Margin="0 150 0 0" VerticalAlignment="Top">
+                    <Border CornerRadius="5" HorizontalAlignment="Left" Width="5" Name="belgi_kassa" Background="Gray"/>
+                    <Button x:Name="kassa_btn" Background="Transparent" Click="kassa_btn_Click" Height="50" Width="177" BorderBrush="Transparent" Margin="0 0 0 0" BorderThickness="0,1,0,1" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Visibility="Hidden">
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" Cursor="Hand">
+                            <md:PackIcon Kind="NetworkCashBox" Height="50" Width="30" Padding="0,0,0,2" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="kassa_txt" Background="Transparent" HorizontalAlignment="Left" Text="Касса" TextWrapping="Wrap" Width="100" Height="50" Margin="5,0,0,0"  FontFamily="times new roman" FontSize="15" Padding="0,15,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
                 <Button x:Name="nazad_btn" VerticalAlignment="Bottom" Margin="0 50" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Background="SteelBlue" Content="Назад" Foreground="White" FontSize="20" Padding="0 0 0 0" Visibility="Hidden" Click="nazad_btn_Click">
                     
                 </Button>

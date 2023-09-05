@@ -24,8 +24,6 @@ namespace ShopSystem.Pages
         {
             InitializeComponent();
             MainWindow = main;
-            con_pass2.Visibility = Visibility.Collapsed;
-            pass2.Visibility = Visibility.Collapsed;
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

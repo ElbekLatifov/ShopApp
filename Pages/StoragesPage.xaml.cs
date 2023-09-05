@@ -70,7 +70,11 @@ namespace ShopSystem.Pages
         private void edit_btn_Click(object sender, RoutedEventArgs e)
         {
             var index = storage_data.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1)
+            {
+                MessageBox.Show("Выберите продукт");
+                return;
+            }
             var db = new AppDbContext();
             
                 var items = new List<DataModel>();
@@ -119,15 +123,23 @@ namespace ShopSystem.Pages
         private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
             var index = storage_data.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1)
+            {
+                MessageBox.Show("Выберите продукт");
+                return;
+            }
             var items = new List<DataModel>();
             items = (List<DataModel>)storage_data.ItemsSource;
             var item = items[index];
-            var db = new AppDbContext();
-            var product = db.Products.Where(p => p.ShopId == Worker.ShopId).First(p => p.Barcode == item.Штрихкод);
-            db.Products.Remove(product);
-            db.SaveChanges();
-            Load();
+            var surov = MessageBox.Show("Вы уверены, что хотите удалить товар?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Stop);
+            if (surov == MessageBoxResult.Yes)
+            {
+                var db = new AppDbContext();
+                var product = db.Products.Where(p => p.ShopId == Worker.ShopId).First(p => p.Barcode == item.Штрихкод);
+                db.Products.Remove(product);
+                db.SaveChanges();
+                Load();
+            }
         }
 
         private void read_btn_Click(object sender, RoutedEventArgs e)
@@ -138,7 +150,11 @@ namespace ShopSystem.Pages
         private void only_add_Click(object sender, RoutedEventArgs e)
         {
             var index = storage_data.SelectedIndex;
-            if (index == -1) return;
+            if (index == -1)
+            {
+                MessageBox.Show("Выберите продукт");
+                return;
+            } 
             var db = new AppDbContext();
 
             var items = new List<DataModel>();

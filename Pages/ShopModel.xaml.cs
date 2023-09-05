@@ -62,6 +62,7 @@ namespace ShopSystem.Pages
             workerPage.shops_btn.Visibility = Visibility.Hidden;
             workerPage.nazad_btn.Visibility = Visibility.Visible;
             workerPage.addproduct_btn.Visibility = Visibility.Visible;
+            workerPage.kassa_btn.Visibility = Visibility.Visible;
             workerPage.ShopId = (Guid)id.Content;
             workerPage.main_lbl.Content = "Мой магазин: ";
             workerPage.shopName.Text = label_name.Text;

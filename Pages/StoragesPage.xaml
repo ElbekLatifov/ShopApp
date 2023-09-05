@@ -45,7 +45,7 @@
                 <DataGrid HorizontalAlignment="Left" Width="915" RowHeight="35"  CellStyle="{DynamicResource MaterialDesignDataGridCell}" 
                           Background="White" x:Name="storage_data" AutoGenerateColumns="True" 
                           SelectionUnit="FullRow" 
-                          GridLinesVisibility="All" ColumnWidth="auto" 
+                          GridLinesVisibility="All" ColumnWidth="auto" FontSize="12"
                           CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" BorderThickness="3" 
                           CanUserAddRows="False" CanUserDeleteRows="False" VerticalGridLinesBrush="Aqua" VerticalScrollBarVisibility="Auto"  KeyboardNavigation.TabNavigation="Once" VirtualizingPanel.VirtualizationMode="Recycling"
                           HorizontalGridLinesBrush="Aquamarine" Style="{StaticResource MaterialDesignDataGrid}" Cursor="Hand" FontFamily="Verdana" 
