@@ -35,7 +35,7 @@ namespace ShopSystem.Pages
         private void Load()
         {
             var db = new AppDbContext();
-            var subcategory = db.Subcategories.First(p=>p.Title == subcategory_name.SelectedValue.ToString());
+            var subcategory = db.Subcategories.Where(p => p.ShopId == StoragesPage.Worker.ShopId).First(p=>p.Title == subcategory_name.SelectedValue.ToString());
             var shop = db.Shops.First(p=>p.Id == StoragesPage.Worker.ShopId);
             var product = new Product()
             {
@@ -59,7 +59,7 @@ namespace ShopSystem.Pages
         public void ComboLoad()
         {
             var db = new AppDbContext();
-            var categories = db.Categories.ToList();
+            var categories = db.Categories.Where(p=>p.ShopId == StoragesPage.Worker.ShopId).ToList();
             var list = new List<string>();
             foreach ( var category in categories )
             {
@@ -197,7 +197,7 @@ namespace ShopSystem.Pages
         private void category_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var db = new AppDbContext();
-            var category = db.Categories.First(p=>p.Title == category_name.SelectedValue.ToString());
+            var category = db.Categories.Where(p => p.ShopId == StoragesPage.Worker.ShopId).First(p=>p.Title == category_name.SelectedValue.ToString());
             var subcategories = db.Subcategories.Where(p => p.ParentId == category.Id).ToList();
             var lsit  = new List<string>();
             foreach (var item in subcategories)

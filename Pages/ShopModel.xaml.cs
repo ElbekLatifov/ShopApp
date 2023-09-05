@@ -85,13 +85,28 @@ namespace ShopSystem.Pages
                 var query = new AppDbContext();
                 var shop = query.Shops.First(x => x.Id == (Guid)id.Content);
                 query.Shops.Remove(shop);
-
-                if (query.Products.Any(p => p.ShopId == shop.Id))
+                if(query.Categories.Any(p=>p.ShopId ==  shop.Id))
                 {
-                    var products = query.Products.Where(p => p.ShopId == shop.Id).ToList();
-                    foreach (var product in products)
+                    var categories = query.Categories.Where(p=>p.ShopId == shop.Id).ToList();
+                    foreach(var category in categories)
                     {
-                        query.Products.Remove(product);
+                        query.Categories.Remove(category);
+                        query.SaveChanges();
+                        if (query.Subcategories.Any(p => p.ParentId == category.Id))
+                        {
+                            var subcategories = query.Subcategories.Where(p=>p.ParentId == category.Id).ToList();
+                            foreach (var item in subcategories)
+                            {
+                                query.Subcategories.Remove(item);
+                                query.SaveChanges();
+                                if(query.Products.Any(p=>p.Categoryid == item.Id))
+                                {
+                                    var products = query.Products.Where(p=>p.Categoryid==item.Id).ToList();
+                                    query.Products.RemoveRange(products);
+                                }
+                            }
+                        }
+
                     }
                 }
                 query.SaveChanges();

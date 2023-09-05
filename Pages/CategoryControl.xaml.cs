@@ -91,9 +91,9 @@ namespace ShopSystem.Pages
                             foreach (var item in subcategories)
                             {
                                 query.Subcategories.Remove(item);
-                                //var products = query.Products.Where(p => p.Categoryid == item.Id).ToList();
-                                //if (products.Count > 0)
-                                //    query.RemoveRange(products);
+                                var products = query.Products.Where(p => p.Categoryid == item.Id).ToList();
+                                if (products.Count > 0)
+                                    query.RemoveRange(products);
                             }
                         }
                         query.Categories.Remove(category);
