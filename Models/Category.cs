@@ -11,5 +11,5 @@ public partial class Category
 
     public string Title { get; set; }
     public DateTime Created_time { get; set; }
-    public Guid ShopId { get; set; }
+    public Guid? ShopId { get; set; }
 }

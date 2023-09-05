@@ -16,6 +16,6 @@ public partial class Product
     public double PriceCome { get; set; }
     public double PriceGo { get; set; }
     public DateTime Created_time { get; set; }
-    public Guid ShopId { get; set; }
+    public Guid? ShopId { get; set; }
     public int Count { get; set; }
 }

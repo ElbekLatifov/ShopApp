@@ -23,6 +23,7 @@ public class AppDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<AddedProduct> AdditionalProducts { get; set; }
+    public DbSet<Cashbox> Кассы { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

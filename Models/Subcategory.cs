@@ -14,7 +14,7 @@ namespace ShopSystem.Models
 
         public string Title { get; set; }
         public DateTime Created_time { get; set; }
-        public Guid ShopId { get; set; }
+        public Guid? ShopId { get; set; }
         public Guid? ParentId { get; set; }
     }
 }

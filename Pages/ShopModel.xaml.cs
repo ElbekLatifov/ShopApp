@@ -66,7 +66,6 @@ namespace ShopSystem.Pages
             workerPage.ShopId = (Guid)id.Content;
             workerPage.main_lbl.Content = "Мой магазин: ";
             workerPage.shopName.Text = label_name.Text;
-            workerPage.ShopId = (Guid)id.Content;
             await workerPage.Load(true, false, false);
         }
 

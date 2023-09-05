@@ -81,7 +81,7 @@
 
                 <StackPanel x:Name="search_steak" Margin="0 20 0 0" Height="85" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <Border  Width="450" Height="40" Margin="150 0 0 0" CornerRadius="15" Background="Aqua">
+                        <Border  Width="450" Height="40" Margin="150 0 0 0" CornerRadius="15" Background="PapayaWhip">
                             <TextBox Width="425" md:HintAssist.Hint="Найти магазин" md:HintAssist.HintOpacity="0.3" x:Name="search_txt" BorderThickness="0" Padding="0 0" TextChanged="search_txt_TextChanged" FontSize="18"  FontFamily="Times New Roman" VerticalContentAlignment="Center"/>
                         </Border>
                         <Button x:Name="search_btn" Width="50" Margin="20 0 0 0" Height="30" FontSize="15" Click="search_btn_Click" FontFamily="SimSun-ExtB" Padding="0,0,0,0">

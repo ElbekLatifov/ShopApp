@@ -1,0 +1,16 @@
+﻿<Window x:Class="ShopSystem.Pages.AddKassa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"         
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ShopSystem.Pages"
+        mc:Ignorable="d"
+        Title="AddKassa" Height="300" Width="400" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBox x:Name="addtxt" md:HintAssist.Hint="Введите название касса" md:HintAssist.IsFloating="True" Margin="10 50 10 0" md:HintAssist.HintOpacity="0.3" Height="50" FontSize="18" PreviewTextInput="addtxt_PreviewTextInput"/>
+            <Button x:Name="addbtn" Content="Добавить" Width="190" Height="40" Margin="0 70 0 0" Background="green" BorderBrush="Transparent" Click="addbtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -15,6 +15,7 @@
     <None Remove="Images\list.png" />
     <None Remove="Images\pen.png" />
     <None Remove="Images\product_only.png" />
+    <None Remove="Images\Без названия.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +40,7 @@
     <Resource Include="Images\list.png" />
     <Resource Include="Images\pen.png" />
     <Resource Include="Images\product_only.png" />
+    <Resource Include="Images\Без названия.png" />
   </ItemGroup>
 
   <ItemGroup>

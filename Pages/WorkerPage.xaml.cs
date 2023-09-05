@@ -15,7 +15,7 @@ namespace ShopSystem.Pages
     public partial class WorkerPage : Page
     {
         MainWindow MainWindow;
-        public Guid ShopId { get; set; }
+        public Guid? ShopId { get; set; }
         public Guid? CategoryId { get; set; }
         public Guid? SubCategoryId { get; set; }
         public WorkerPage(MainWindow main)
@@ -51,8 +51,8 @@ namespace ShopSystem.Pages
             belgi_addproduct.Visibility = Visibility.Hidden;
             belgi_kassa.Visibility = Visibility.Hidden;
             Salom.Height = 700;
-            Salom.Navigate(new StoragesPage(MainWindow, this));
             worker_grid.Height = 0;
+            Salom.Navigate(new StoragesPage(MainWindow, this));
         }
 
         private async void addproduct_btn_Click(object sender, RoutedEventArgs e)
@@ -88,7 +88,7 @@ namespace ShopSystem.Pages
         {
             Salom.Height = 0;
             worker_grid.Height = 700;
-            main_lbl.Content = "Мои магазины";
+            main_lbl.Content = "Мои магазины"; shopName.Text = string.Empty; categoryname.Text = string.Empty; subcategoryname.Text = string.Empty;
             shopName.Text = "";
             shops_btn.Visibility = Visibility.Visible;
             addproduct_btn.Visibility = Visibility.Hidden;
@@ -98,6 +98,7 @@ namespace ShopSystem.Pages
             belgi_sklad.Visibility = Visibility.Hidden;
             belgi_kassa.Visibility = Visibility.Hidden;
             kassa_btn.Visibility = Visibility.Hidden;
+            ShopId = null; CategoryId = null; SubCategoryId = null;
             Page_Loaded(false, true);
         }
 
@@ -121,6 +122,7 @@ namespace ShopSystem.Pages
 
             if (_category)
             {
+                addCategory_btn.Content = "+Категория";
                 var categories = await db.Categories.Where(p=>p.ShopId == ShopId).OrderByDescending(p => p.Created_time).ToListAsync();
                 var categoriesList = new List<CategoryControl>();
 
@@ -140,6 +142,7 @@ namespace ShopSystem.Pages
 
             if (_subcategory)
             {
+                addCategory_btn.Content = "+Подкатегория";
                 var subcategories = await db.Subcategories.Where(p => p.ParentId == CategoryId && p.ShopId == ShopId).OrderByDescending(p => p.Created_time).ToListAsync();
                 var categoriesList = new List<CategoryControl>();
 
@@ -159,6 +162,7 @@ namespace ShopSystem.Pages
 
             if (_products)
             {
+                addCategory_btn.Content = "+Продукт";
                 var products = await db.Products.Where(p => p.Categoryid == SubCategoryId && p.ShopId == ShopId).OrderByDescending(p => p.Created_time).ToListAsync();
                 var productsBox = new List<ProductControl>();
 
@@ -381,19 +385,21 @@ namespace ShopSystem.Pages
                     shopName.Text = shop.Name;
                     CategoryId = null;
                 }
-                else
-                {
-                    main_lbl.Content = "Мои магазины";
-                    shopName.Text = "";
-                    shops_btn.Visibility = Visibility.Visible;
-                    addproduct_btn.Visibility = Visibility.Hidden;
-                    nazad_btn.Visibility = Visibility.Hidden;
-                    sklad_btn.Visibility = Visibility.Hidden;
-                    belgi_moymagazin.Visibility = Visibility.Visible;
-                    belgi_sklad.Visibility = Visibility.Hidden;
-                    belgi_kassa.Visibility = Visibility.Hidden;
-                    Page_Loaded(false, true);
-                }
+                //else
+                //{
+                //    main_lbl.Content = "Мои магазины";
+                //    shopName.Text = "";
+                //    shops_btn.Visibility = Visibility.Visible;
+                //    addproduct_btn.Visibility = Visibility.Hidden;
+                //    nazad_btn.Visibility = Visibility.Hidden;
+                //    sklad_btn.Visibility = Visibility.Hidden;
+                //    kassa_btn.Visibility = Visibility.Hidden;
+                //    belgi_moymagazin.Visibility = Visibility.Visible;
+                //    belgi_sklad.Visibility = Visibility.Hidden;
+                //    belgi_kassa.Visibility = Visibility.Hidden;
+                //    ShopId = null; CategoryId = null; SubCategoryId = null;
+                //    Page_Loaded(false, true);
+                //}
             }
         }
 
@@ -408,6 +414,8 @@ namespace ShopSystem.Pages
             belgi_addproduct.Visibility = Visibility.Hidden;
             belgi_sklad.Visibility= Visibility.Hidden;
             belgi_moymagazin.Visibility= Visibility.Hidden;
+            Salom.Height = 700; worker_grid.Height = 0;
+            Salom.Navigate(new CashBoxPage(MainWindow, this));
         }
     }
 }

@@ -44,22 +44,26 @@ namespace ShopSystem.Pages
                 {
                     foreach (var product in products)
                     {
-                        var subcategory = db.Subcategories.First(p => p.Id == product.Categoryid);
-                        var category = db.Categories.First(p => p.Id == subcategory.ParentId);
-                        var shop = db.Shops.First(p => p.Id == product.ShopId);
+                        var subcategory = db.Subcategories.FirstOrDefault(p => p.Id == product.Categoryid);
+                        if (subcategory != null)
+                        {
+                            var category = db.Categories.FirstOrDefault(p => p.Id == subcategory.ParentId);
+                            var shop = db.Shops.FirstOrDefault(p => p.Id == product.ShopId);
 
-                        var item = new DataModel();
-                        item.Номер = i;
-                        item.Продукт = product.Title;
-                        item.Подкатегория = subcategory.Title;
-                        item.Категория = category.Title;
-                        item.Прибывшая = product.PriceCome;
-                        item.Штрихкод = product.Barcode!;
-                        item.Текущая = product.PriceGo;
-                        item.Магазин = shop.Name;
-                        item.Количство = product.Count;
-                        items.Add(item);
-                        i++;
+                            var item = new DataModel();
+                            item.Номер = i;
+                            item.Продукт = product.Title;
+                            item.Подкатегория = subcategory.Title;
+                            item.Категория = category.Title;
+                            item.Прибывшая = product.PriceCome;
+                            item.Штрихкод = product.Barcode!;
+                            item.Текущая = product.PriceGo;
+                            item.Магазин = shop.Name;
+                            item.Количство = product.Count;
+                            items.Add(item);
+                            i++;
+                        }
+                        
                     }
                     
                     storage_data.ItemsSource = items;

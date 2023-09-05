@@ -34,6 +34,11 @@ namespace ShopSystem.Pages
             }
         }
 
+        public void UpdateCash()
+        {
+
+        }
+
         public void UpdateShop()
         {
             var shopName = addtxt.Text;
@@ -60,7 +65,7 @@ namespace ShopSystem.Pages
             }
         }
 
-        public void UpdateCategory()
+        public async void UpdateCategory()
         {
             var categoryName = addtxt.Text;
 
@@ -76,7 +81,7 @@ namespace ShopSystem.Pages
                     category.Title = addtxt.Text;
                     query.Categories.Update(category);
                     query.SaveChanges();
-                    _shopPage.Load(true, false, false);
+                    await _shopPage.Load(true, false, false);
                     Close();
                 }
                 else if (query.Subcategories.Any(x => x.Id == id))
@@ -85,7 +90,7 @@ namespace ShopSystem.Pages
                     subcategory.Title = addtxt.Text;
                     query.Subcategories.Update(subcategory);
                     query.SaveChanges();
-                    _shopPage.Load(false, true, false);
+                    await _shopPage.Load(false, true, false);
                     Close();
                 }
             }
