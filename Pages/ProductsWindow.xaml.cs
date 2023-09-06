@@ -39,7 +39,7 @@ namespace ShopSystem.Pages
             using (var db = new AppDbContext())
             {
                 var items = new List<DataModel>();
-                var products = db.Products.Where(p => p.ShopId == workerPage.ShopId).ToList();
+                var products = db.Products.Where(p => p.ShopId == workerPage.ShopId).Where(p => p.TabName == null).ToList();
                 int i = 1;
                 if (products.Count > 0)
                 {
@@ -80,32 +80,8 @@ namespace ShopSystem.Pages
             }
             var db = new AppDbContext();
 
-            var items = new List<DataModel>();
-            var products = db.Products.Where(p => p.ShopId == workerPage.ShopId).Where(p => p.TabName == null).ToList();
-            int i = 1;
-            if (products.Count > 0)
-            {
-                foreach (var product in products)
-                {
-                    var subcategory = db.Subcategories.First(p => p.Id == product.Categoryid);
-                    var category = db.Categories.First(p => p.Id == subcategory.ParentId);
-                    var shop = db.Shops.First(p => p.Id == product.ShopId);
-
-                    var item = new DataModel();
-                    item.Номер = i;
-                    item.Продукт = product.Title;
-                    item.Подкатегория = subcategory.Title;
-                    item.Категория = category.Title;
-                    item.Прибывшая = product.PriceCome;
-                    item.Штрихкод = product.Barcode!;
-                    item.Текущая = product.PriceGo;
-                    item.Магазин = shop.Name;
-                    item.Количство = product.Count;
-                    items.Add(item);
-                    i++;
-                }
-            }
-            var selectedData = items[index];
+            var items = storage_data.ItemsSource as List<DataModel>;
+            var selectedData = items![index];
             var product2 = db.Products.First(p => p.Barcode == selectedData.Штрихкод);
             product2.TabName = Header;
             db.SaveChanges();

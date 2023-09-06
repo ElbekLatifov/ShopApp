@@ -24,7 +24,8 @@ namespace ShopSystem.Pages
         public void LoadTab()
         {
             tabcashed_products1.Items.Clear();
-            tabcashed_products1.Items.Add(new AddProductButton(MainWindow, WorkerPage, this, tab1.Header.ToString()!));
+            var btn = new AddProductButton(MainWindow, WorkerPage, this, tab1.Header.ToString()!);
+            tabcashed_products1.Items.Add(btn);
             var db = new AppDbContext();
             var products = db.Products.Where(p=>p.TabName == tab1.Header.ToString() && p.ShopId == WorkerPage.ShopId).ToList();
 
@@ -40,7 +41,8 @@ namespace ShopSystem.Pages
         public void LoadTabKiyim()
         {
             tabcashed_products2.Items.Clear();
-            tabcashed_products2.Items.Add(new AddProductButton(MainWindow, WorkerPage, this, tab_kiyimlar.Header.ToString()!));
+            var btn = new AddProductButton(MainWindow, WorkerPage, this, tab_kiyimlar.Header.ToString()!);
+            tabcashed_products2.Items.Add(btn);
             var db = new AppDbContext();
             var products = db.Products.Where(p => p.TabName == tab_kiyimlar.Header.ToString() && p.ShopId == WorkerPage.ShopId).ToList();
 
@@ -74,7 +76,8 @@ namespace ShopSystem.Pages
         public void LoadTabAnimal()
         {
             tabcashed_products4.Items.Clear();
-            tabcashed_products4.Items.Add(new AddProductButton(MainWindow, WorkerPage, this, tab_animal.Header.ToString()!));
+            var btn = new AddProductButton(MainWindow, WorkerPage, this, tab_animal.Header.ToString()!); 
+            tabcashed_products4.Items.Add(btn);
             var db = new AppDbContext();
             var products = db.Products.Where(p => p.TabName == tab_animal.Header.ToString() && p.ShopId == WorkerPage.ShopId).ToList();
 
@@ -91,7 +94,8 @@ namespace ShopSystem.Pages
         public void LoadTabIchimlik()
         {
             tabcashed_products5.Items.Clear();
-            tabcashed_products5.Items.Add(new AddProductButton(MainWindow, WorkerPage, this, tab_ichimlik.Header.ToString()!));
+            var btn = new AddProductButton(MainWindow, WorkerPage, this, tab_ichimlik.Header.ToString()!);
+            tabcashed_products5.Items.Add(btn);
             var db = new AppDbContext();
             var products = db.Products.Where(p => p.TabName == tab_ichimlik.Header.ToString() && p.ShopId == WorkerPage.ShopId).ToList();
 
@@ -108,7 +112,8 @@ namespace ShopSystem.Pages
         public void LoadTabMaishiy()
         {
             tabcashed_products6.Items.Clear();
-            tabcashed_products6.Items.Add(new AddProductButton(MainWindow, WorkerPage, this, tab_maishiy.Header.ToString()!));
+            var btn = new AddProductButton(MainWindow, WorkerPage, this, tab_maishiy.Header.ToString()!);
+            tabcashed_products6.Items.Add(btn);
             var db = new AppDbContext();
             var products = db.Products.Where(p => p.TabName == tab_maishiy.Header.ToString() && p.ShopId == WorkerPage.ShopId).ToList();
 

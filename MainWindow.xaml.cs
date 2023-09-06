@@ -1,5 +1,7 @@
-﻿using ShopSystem.Pages;
+﻿using ShopSystem.Context;
+using ShopSystem.Pages;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -22,7 +24,13 @@ namespace ShopSystem
         {
             var result = MessageBox.Show("Вы действительно хотите закрыть?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if(result == MessageBoxResult.Yes)
-            Application.Current.Shutdown();
+            {
+                var db = new AppDbContext();
+                var cashes = db.CashedProducts.ToList();
+                db.CashedProducts.RemoveRange(cashes);
+                db.SaveChanges();
+                Application.Current.Shutdown();
+            }
         }
 
         private void exit_btn_MouseEnter(object sender, MouseEventArgs e)

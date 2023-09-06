@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Margin="10">
     <Border CornerRadius="10" Background="SeaShell" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
-        <md:PackIcon Width="100" Height="100" Kind="Plus"/>
+        <md:PackIcon Width="100" Height="100" Kind="Plus" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Border>
 </UserControl>
