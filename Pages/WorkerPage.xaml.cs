@@ -306,56 +306,6 @@ namespace ShopSystem.Pages
         {
             var db = new AppDbContext();
 
-            //if(worker_grid.Height == 0)
-            //{
-            //    belgi_addproduct.Visibility = Visibility.Visible;
-            //    belgi_sklad.Visibility = Visibility.Collapsed;
-            //    if(SubCategoryId != null)
-            //    {
-            //        Salom.Height = 0;
-            //        worker_grid.Height = 700;
-            //        var _subcategory = db.Subcategories.First(p => p.Id == SubCategoryId);
-            //        var _category = db.Categories.First(p => p.Id == _subcategory.ParentId);
-            //        var shop = db.Shops.First(p => p.Id == ShopId);
-            //        await Load(false, false, true);
-            //        shopName.Text = shop.Name;
-            //        main_lbl.Content = "Мой магазин: ";
-            //        categoryname.Text = "   Категория: " + _category.Title;
-            //        subcategoryname.Text = "   Подкатегория: " + _subcategory.Title;
-            //    }
-            //    else 
-            //    if(CategoryId != null)
-            //    {
-            //        Salom.Height = 0;
-            //        worker_grid.Height = 700;
-            //        var _category = db.Categories.First(p => p.Id == CategoryId);
-            //        var shop = db.Shops.First(p => p.Id == ShopId);
-            //        await Load(false, true, false);
-            //        addCategory_btn.Content = "+Подкатегория";
-            //        subcategoryname.Text = "";
-            //        shopName.Text = shop.Name;
-            //        main_lbl.Content = "Мой магазин: ";
-            //        categoryname.Text = "   Категория: " + _category.Title;
-            //    }
-            //    else if(ShopId != null)
-            //    {
-            //        Salom.Height = 0;
-            //        worker_grid.Height = 700;
-            //        await Load(true, false, false);
-            //        addCategory_btn.Content = "+Категория";
-            //        main_lbl.Content = "Мой магазин: ";
-            //        var shop = db.Shops.First(p => p.Id == ShopId);
-            //        shopName.Text = shop.Name;
-            //    }
-            //    else
-            //    {
-            //        Salom.Height = 0;
-            //        worker_grid.Height = 700;
-            //        Page_Loaded(_showShops: true);
-            //    }
-            //}
-            //else
-
             if (db.Subcategories.Any(p => p.Id == SubCategoryId))
             {
                 var _subcategory = db.Subcategories.First(p => p.Id == SubCategoryId);
@@ -385,21 +335,6 @@ namespace ShopSystem.Pages
                     shopName.Text = shop.Name;
                     CategoryId = null;
                 }
-                //else
-                //{
-                //    main_lbl.Content = "Мои магазины";
-                //    shopName.Text = "";
-                //    shops_btn.Visibility = Visibility.Visible;
-                //    addproduct_btn.Visibility = Visibility.Hidden;
-                //    nazad_btn.Visibility = Visibility.Hidden;
-                //    sklad_btn.Visibility = Visibility.Hidden;
-                //    kassa_btn.Visibility = Visibility.Hidden;
-                //    belgi_moymagazin.Visibility = Visibility.Visible;
-                //    belgi_sklad.Visibility = Visibility.Hidden;
-                //    belgi_kassa.Visibility = Visibility.Hidden;
-                //    ShopId = null; CategoryId = null; SubCategoryId = null;
-                //    Page_Loaded(false, true);
-                //}
             }
         }
 

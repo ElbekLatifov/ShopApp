@@ -92,7 +92,7 @@
                 </StackPanel>
 
                 <ScrollViewer Height="580" VerticalAlignment="Center" Margin="0,120,0,0" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl x:Name="shoplists" Width="{Binding ElementName=ShopPage, Path=Width}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="shoplists" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel/>

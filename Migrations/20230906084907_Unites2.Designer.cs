@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopSystem.Context;
 
@@ -10,9 +11,11 @@ using ShopSystem.Context;
 namespace ShopSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906084907_Unites2")]
+    partial class Unites2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,48 +76,6 @@ namespace ShopSystem.Migrations
                     b.ToTable("Кассы");
                 });
 
-            modelBuilder.Entity("ShopSystem.Models.CashedProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("CashedTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("Categoryid")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created_time")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<double>("PriceCome")
-                        .HasColumnType("double");
-
-                    b.Property<double>("PriceGo")
-                        .HasColumnType("double");
-
-                    b.Property<Guid?>("ShopId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Totalcount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CashedProducts");
-                });
-
             modelBuilder.Entity("ShopSystem.Models.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -145,6 +106,9 @@ namespace ShopSystem.Migrations
                     b.Property<string>("Barcode")
                         .HasColumnType("longtext");
 
+                    b.Property<bool?>("Cashed")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<Guid?>("Categoryid")
                         .HasColumnType("char(36)");
 
@@ -163,16 +127,13 @@ namespace ShopSystem.Migrations
                     b.Property<Guid?>("ShopId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("TabName")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("ShopSystem.Models.Shop", b =>

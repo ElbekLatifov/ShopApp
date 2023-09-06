@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopSystem.Context;
 
@@ -10,9 +11,11 @@ using ShopSystem.Context;
 namespace ShopSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906091646_Unites3")]
+    partial class Unites3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,9 +85,6 @@ namespace ShopSystem.Migrations
                     b.Property<string>("Barcode")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CashedTime")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<Guid?>("Categoryid")
                         .HasColumnType("char(36)");
 
@@ -106,9 +106,6 @@ namespace ShopSystem.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("Totalcount")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -162,9 +159,6 @@ namespace ShopSystem.Migrations
 
                     b.Property<Guid?>("ShopId")
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("TabName")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()

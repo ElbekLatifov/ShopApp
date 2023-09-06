@@ -13,6 +13,7 @@
     <None Remove="Images\eye close.png" />
     <None Remove="Images\eye open.png" />
     <None Remove="Images\list.png" />
+    <None Remove="Images\meat.jfif" />
     <None Remove="Images\pen.png" />
     <None Remove="Images\product_only.png" />
     <None Remove="Images\Без названия.png" />
@@ -20,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="BarCode" Version="2023.8.4" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -38,6 +40,7 @@
     <Resource Include="Images\eye close.png" />
     <Resource Include="Images\eye open.png" />
     <Resource Include="Images\list.png" />
+    <Resource Include="Images\meat.jfif" />
     <Resource Include="Images\pen.png" />
     <Resource Include="Images\product_only.png" />
     <Resource Include="Images\Без названия.png" />

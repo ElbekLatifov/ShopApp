@@ -78,7 +78,7 @@ namespace ShopSystem.Pages
 
         private void UserControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            MainWindow.mainframe.Navigate(new Kassa());
+            MainWindow.mainframe.Navigate(new Kassa(MainWindow, CashBoxPage.workerPage));
         }
     }
 }

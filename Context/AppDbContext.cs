@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<AddedProduct> AdditionalProducts { get; set; }
     public DbSet<Cashbox> Кассы { get; set; }
-
+    public DbSet<CashedProduct> CashedProducts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql("server=localhost;database=wpf;user=root;", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.24-mysql"));

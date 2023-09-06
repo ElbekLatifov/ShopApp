@@ -22,7 +22,7 @@ namespace ShopSystem.Pages
     /// </summary>
     public partial class CashBoxPage : Page
     {
-        WorkerPage workerPage;
+        public WorkerPage workerPage;
         MainWindow Main;
         public CashBoxPage(MainWindow main, WorkerPage worker)
         {

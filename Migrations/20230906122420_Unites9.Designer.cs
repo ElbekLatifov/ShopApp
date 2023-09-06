@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopSystem.Context;
 
@@ -10,9 +11,11 @@ using ShopSystem.Context;
 namespace ShopSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906122420_Unites9")]
+    partial class Unites9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,6 +167,7 @@ namespace ShopSystem.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("TabName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")

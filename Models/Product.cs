@@ -18,4 +18,5 @@ public partial class Product
     public DateTime Created_time { get; set; }
     public Guid? ShopId { get; set; }
     public int Count { get; set; }
+    public string? TabName { get; set; }
 }
