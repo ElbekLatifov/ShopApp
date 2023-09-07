@@ -49,7 +49,7 @@
                           CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" BorderThickness="3" 
                           CanUserAddRows="False" CanUserDeleteRows="False" VerticalGridLinesBrush="Aqua" VerticalScrollBarVisibility="Auto"  KeyboardNavigation.TabNavigation="Once" VirtualizingPanel.VirtualizationMode="Recycling"
                           HorizontalGridLinesBrush="Aquamarine" Style="{StaticResource MaterialDesignDataGrid}" Cursor="Hand" FontFamily="Verdana" 
-                          FontWeight="Bold" VerticalContentAlignment="Center" AreRowDetailsFrozen="True" IsReadOnly="True" AutomationProperties.IsRowHeader="True" SelectionMode="Single" HorizontalContentAlignment="Center" SelectionChanged="storage_data_SelectionChanged">
+                          FontWeight="Bold" VerticalContentAlignment="Center" AreRowDetailsFrozen="True" IsReadOnly="True" AutomationProperties.IsRowHeader="True" SelectionMode="Single" HorizontalContentAlignment="Center">
                     
                     <DataGrid.RowStyle>
                         <Style TargetType="{x:Type DataGridRow}">
