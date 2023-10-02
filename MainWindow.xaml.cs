@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using MaterialDesignThemes;
 
 namespace ShopSystem
 {     
@@ -46,6 +47,27 @@ namespace ShopSystem
         private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void max_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+                max_bn.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowRestore;
+            }
+            else
+            {
+                max_bn.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowMaximize;
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+            tepa_grid.Width = this.Width;
+        }
+
+        private void min_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }
