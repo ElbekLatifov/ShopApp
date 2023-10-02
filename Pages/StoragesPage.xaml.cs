@@ -1,20 +1,9 @@
-﻿using MaterialDesignThemes.Wpf;
-using ShopSystem.Context;
+﻿using ShopSystem.Context;
 using ShopSystem.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ShopSystem.Pages
 {
@@ -54,11 +43,11 @@ namespace ShopSystem.Pages
                             item.Номер = i;
                             item.Продукт = product.Title;
                             item.Подкатегория = subcategory.Title;
-                            item.Категория = category.Title;
+                            item.Категория = category!.Title;
                             item.Прибывшая = product.PriceCome;
                             item.Штрихкод = product.Barcode!;
                             item.Текущая = product.PriceGo;
-                            item.Магазин = shop.Name;
+                            item.Магазин = shop!.Name;
                             item.Количство = product.Count;
                             items.Add(item);
                             i++;
@@ -79,34 +68,9 @@ namespace ShopSystem.Pages
                 MessageBox.Show("Выберите продукт");
                 return;
             }
-            var db = new AppDbContext();
             
-                var items = new List<DataModel>();
-                var products = db.Products.Where(p => p.ShopId == Worker.ShopId).ToList();
-                int i = 1;
-                if (products.Count > 0)
-                {
-                    foreach (var product in products)
-                    {
-                        var subcategory = db.Subcategories.First(p => p.Id == product.Categoryid);
-                        var category = db.Categories.First(p => p.Id == subcategory.ParentId);
-                        var shop = db.Shops.First(p => p.Id == product.ShopId);
-
-                        var item = new DataModel();
-                        item.Номер = i;
-                        item.Продукт = product.Title;
-                        item.Подкатегория = subcategory.Title;
-                        item.Категория = category.Title;
-                        item.Прибывшая = product.PriceCome;
-                        item.Штрихкод = product.Barcode!;
-                        item.Текущая = product.PriceGo;
-                        item.Магазин = shop.Name;
-                        item.Количство = product.Count;
-                        items.Add(item);
-                        i++;
-                    }
-                }
-            var selectedData = items[index];
+            var items = storage_data.ItemsSource as List<DataModel>;
+            var selectedData = items![index];
             EditFromGrid editFrom = new EditFromGrid(Main, this, selectedData);
             editFrom.ShowDialog();
         }
@@ -115,13 +79,6 @@ namespace ShopSystem.Pages
         {
             AddProductToGrid addProductToGrid = new AddProductToGrid(Main, this);
             addProductToGrid.ShowDialog();
-        }
-
-        private void storage_data_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //edit_btn.Visibility = Visibility.Visible;
-            //delete_btn.Visibility = Visibility.Visible;
-            //only_add.Visibility = Visibility.Visible;
         }
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
@@ -159,34 +116,9 @@ namespace ShopSystem.Pages
                 MessageBox.Show("Выберите продукт");
                 return;
             } 
-            var db = new AppDbContext();
 
-            var items = new List<DataModel>();
-            var products = db.Products.Where(p => p.ShopId == Worker.ShopId).ToList();
-            int i = 1;
-            if (products.Count > 0)
-            {
-                foreach (var product in products)
-                {
-                    var subcategory = db.Subcategories.First(p => p.Id == product.Categoryid);
-                    var category = db.Categories.First(p => p.Id == subcategory.ParentId);
-                    var shop = db.Shops.First(p => p.Id == product.ShopId);
-
-                    var item = new DataModel();
-                    item.Номер = i;
-                    item.Продукт = product.Title;
-                    item.Подкатегория = subcategory.Title;
-                    item.Категория = category.Title;
-                    item.Прибывшая = product.PriceCome;
-                    item.Штрихкод = product.Barcode!;
-                    item.Текущая = product.PriceGo;
-                    item.Магазин = shop.Name;
-                    item.Количство = product.Count;
-                    items.Add(item);
-                    i++;
-                }
-            }
-            var selectedData = items[index];
+            var items = storage_data.ItemsSource as List<DataModel>;
+            var selectedData = items![index];
             OnlyNumberAdd editFrom = new OnlyNumberAdd(Main, this, selectedData);
             editFrom.ShowDialog();       
         }

@@ -147,11 +147,13 @@ namespace ShopSystem.Pages
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var db = new AppDbContext();
-            var cashes = db.CashedProducts.ToList();    
-            db.CashedProducts.RemoveRange(cashes);
-            db.SaveChanges();
-            LoadCashedProducts();
+            ChekWindow chek = new ChekWindow(MainWindow, this);
+            chek.ShowDialog();
+            //var db = new AppDbContext();
+            //var cashes = db.CashedProducts.ToList();    
+            //db.CashedProducts.RemoveRange(cashes);
+            //db.SaveChanges();
+            //LoadCashedProducts();
         }
 
         private void back_Click(object sender, System.Windows.RoutedEventArgs e)
